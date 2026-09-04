@@ -46,7 +46,17 @@ This file is committed alongside every change so the log is always up to date.
 
 ---
 
+### `646da04` — Fix: Remove Scroll from Coming Soon Page
+- **Date:** 2026-09-04
+- **Type:** `fix`
+- **Files Changed:**
+  - `sections/coming-soon.liquid` *(modified)*
+- **Details:** Coming Soon page ছিল scroll করতে হচ্ছিল কারণ password layout এর header ও footer page এর উচ্চতা বাড়িয়ে দিচ্ছিল। Fix হিসেবে `.cs-page` কে `position: fixed; inset: 0; z-index: 9999` করা হয়েছে যাতে সে পুরো viewport ঢেকে রাখে। `.template-password .password-header`, `footer`, এবং `hr` কে `display: none` করে লুকানো হয়েছে।
+
+---
+
 ## Commit Type Reference
+
 
 
 | Type | Meaning |
