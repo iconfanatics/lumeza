@@ -1,264 +1,468 @@
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 
 <style>
-  .coming-soon-wrapper {
-    position: relative;
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@700;800&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .cs-page {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
     width: 100%;
-    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #1e1e2f 0%, #11111a 100%);
-    color: #ffffff;
-    padding: 4rem 2rem;
+    background: #04040c;
   }
 
-  .coming-soon-wrapper::before {
+  /* ── Animated noise texture ── */
+  .cs-page::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(123, 44, 191, 0.15) 0%, transparent 60%);
-    animation: rotateGradient 20s linear infinite;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
     z-index: 0;
+    pointer-events: none;
   }
 
-  @keyframes rotateGradient {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  /* ── Orb blobs ── */
+  .cs-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    animation: orbFloat 10s ease-in-out infinite alternate;
+  }
+  .cs-orb--1 { width: 600px; height: 600px; top: -200px; left: -150px; background: radial-gradient(circle, rgba(120,60,255,0.45) 0%, transparent 70%); animation-duration: 12s; }
+  .cs-orb--2 { width: 500px; height: 500px; bottom: -150px; right: -100px; background: radial-gradient(circle, rgba(0,200,255,0.35) 0%, transparent 70%); animation-duration: 15s; animation-delay: -4s; }
+  .cs-orb--3 { width: 350px; height: 350px; top: 50%; left: 55%; background: radial-gradient(circle, rgba(255,70,150,0.2) 0%, transparent 70%); animation-duration: 18s; animation-delay: -8s; }
+
+  @keyframes orbFloat {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, 30px) scale(1.08); }
   }
 
-  .coming-soon-card {
+  /* ── Grid lines ── */
+  .cs-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  /* ── Main card ── */
+  .cs-card {
     position: relative;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 4rem;
-    max-width: 800px;
     width: 100%;
+    max-width: 860px;
+    margin: 2rem;
+    padding: 5rem 4rem;
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255,255,255,0.09);
+    box-shadow: 0 60px 120px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
     text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transform: translateY(30px);
-    opacity: 0;
-    animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  @keyframes slideUpFade {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(50px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  .coming-soon__title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+  /* Badge */
+  .cs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 99px;
+    background: rgba(120,60,255,0.15);
+    border: 1px solid rgba(120,60,255,0.35);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #a78bff;
+    margin-bottom: 2rem;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  }
+  .cs-badge__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #a78bff;
+    box-shadow: 0 0 8px #a78bff;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* Headline */
+  .cs-headline {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
     font-weight: 800;
-    margin-bottom: 1rem;
-    background: linear-gradient(90deg, #ffffff, #a8b0d3);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+  .cs-headline span {
+    background: linear-gradient(90deg, #a78bff, #60d0ff, #ff7eb3);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -0.02em;
+    animation: shine 4s linear infinite;
+  }
+  @keyframes shine {
+    to { background-position: 200% center; }
   }
 
-  .coming-soon__subtitle {
-    font-size: 1.125rem;
-    color: #a8b0d3;
-    margin-bottom: 3rem;
-    line-height: 1.6;
-    max-width: 600px;
-    margin-inline: auto;
+  .cs-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto 3rem;
+    font-weight: 400;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
   }
 
-  .countdown-container {
+  /* ── Countdown ── */
+  .cs-countdown {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    gap: 12px;
+    margin-bottom: 3.5rem;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
   }
-
-  .countdown-item {
+  .cs-cd-item {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
-  .countdown-number {
-    font-size: 3rem;
+  .cs-cd-box {
+    position: relative;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 700;
-    line-height: 1;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.05);
-    min-width: 100px;
+    width: 110px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: color 0.3s;
   }
-
-  .countdown-label {
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
+  .cs-cd-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+  }
+  /* flip line */
+  .cs-cd-box::after {
+    content: '';
+    position: absolute;
+    left: 8px; right: 8px;
+    top: 50%;
+    height: 1px;
+    background: rgba(0,0,0,0.3);
+  }
+  .cs-cd-colon {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.2);
+    margin-top: -12px;
+    padding: 0 2px;
+  }
+  .cs-cd-label {
+    margin-top: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #8c94af;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.3);
   }
 
-  .coming-soon-form .newsletter-form__field-wrapper {
+  /* ── Newsletter form ── */
+  .cs-form-wrapper {
     max-width: 500px;
     margin: 0 auto;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
   }
-
-  .coming-soon-form .field__input {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .cs-form {
+    display: flex;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 6px;
+  }
+  .cs-form input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
     color: #fff;
-    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 14px;
   }
-  
-  .coming-soon-form .field__input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .coming-soon-form .newsletter__button {
-    background: #ffffff;
-    color: #11111a;
-    border-radius: 8px;
+  .cs-form input[type="email"]::placeholder { color: rgba(255,255,255,0.3); }
+  .cs-form button {
+    background: linear-gradient(135deg, #7c3cff, #4da8ff);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
     font-weight: 600;
-    transition: all 0.3s ease;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .cs-form button:hover { opacity: 0.9; transform: scale(1.02); }
+
+  .cs-form-hint {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
   }
 
-  .coming-soon-form .newsletter__button:hover {
-    background: #e2e8f0;
+  /* Success & Error */
+  .cs-success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(0,220,130,0.1);
+    border: 1px solid rgba(0,220,130,0.25);
+    color: #4dffa4;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .cs-error {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #ff6b8a;
+  }
+
+  /* ── Divider ── */
+  .cs-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 2.5rem 0;
+    opacity: 0.2;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+  }
+  .cs-divider::before, .cs-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+  }
+  .cs-divider span { font-size: 0.75rem; color: #fff; white-space: nowrap; letter-spacing: 0.1em; }
+
+  /* ── Social links ── */
+  .cs-social {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    animation: cardIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+  }
+  .cs-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .cs-social a:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+    color: #fff;
     transform: translateY(-2px);
   }
+  .cs-social svg { width: 20px; height: 20px; fill: currentColor; }
 
-  @media screen and (max-width: 768px) {
-    .coming-soon-card {
-      padding: 2rem 1.5rem;
-    }
-    .countdown-container {
-      gap: 0.5rem;
-    }
-    .countdown-number {
-      font-size: 2rem;
-      min-width: 70px;
-      padding: 0.75rem 1rem;
-    }
+  /* ── Footer line ── */
+  .cs-footer {
+    position: absolute;
+    bottom: 24px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.15);
+    z-index: 1;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 640px) {
+    .cs-card { padding: 3rem 1.5rem; }
+    .cs-cd-box { width: 70px; height: 72px; font-size: 1.8rem; border-radius: 10px; }
+    .cs-countdown { gap: 6px; }
+    .cs-cd-colon { font-size: 1.8rem; }
+    .cs-form { flex-direction: column; }
+    .cs-form button { width: 100%; }
   }
 </style>
 
-<div class="coming-soon-wrapper">
-  <div class="coming-soon-card">
-    <h1 class="coming-soon__title">{{ section.settings.heading }}</h1>
-    <div class="coming-soon__subtitle">{{ section.settings.text }}</div>
-    
+<section class="cs-page">
+  <div class="cs-orb cs-orb--1"></div>
+  <div class="cs-orb cs-orb--2"></div>
+  <div class="cs-orb cs-orb--3"></div>
+  <div class="cs-grid"></div>
+
+  <div class="cs-card">
+    <div class="cs-badge">
+      <span class="cs-badge__dot"></span>
+      {{ section.settings.badge_text }}
+    </div>
+
+    <h1 class="cs-headline">
+      {{ section.settings.headline_plain }} <br>
+      <span>{{ section.settings.headline_gradient }}</span>
+    </h1>
+
+    <p class="cs-sub">{{ section.settings.subtext }}</p>
+
     {% if section.settings.show_countdown %}
-      <div class="countdown-container" id="countdown-{{ section.id }}">
-        <div class="countdown-item">
-          <div class="countdown-number" id="days">00</div>
-          <div class="countdown-label">{{ 'general.date.days' | t | default: 'Days' }}</div>
+      <div class="cs-countdown" id="cs-countdown-{{ section.id }}">
+        <div class="cs-cd-item">
+          <div class="cs-cd-box" id="cs-days">00</div>
+          <div class="cs-cd-label">Days</div>
         </div>
-        <div class="countdown-item">
-          <div class="countdown-number" id="hours">00</div>
-          <div class="countdown-label">{{ 'general.date.hours' | t | default: 'Hours' }}</div>
+        <div class="cs-cd-colon">:</div>
+        <div class="cs-cd-item">
+          <div class="cs-cd-box" id="cs-hours">00</div>
+          <div class="cs-cd-label">Hours</div>
         </div>
-        <div class="countdown-item">
-          <div class="countdown-number" id="minutes">00</div>
-          <div class="countdown-label">{{ 'general.date.minutes' | t | default: 'Minutes' }}</div>
+        <div class="cs-cd-colon">:</div>
+        <div class="cs-cd-item">
+          <div class="cs-cd-box" id="cs-minutes">00</div>
+          <div class="cs-cd-label">Minutes</div>
         </div>
-        <div class="countdown-item">
-          <div class="countdown-number" id="seconds">00</div>
-          <div class="countdown-label">{{ 'general.date.seconds' | t | default: 'Seconds' }}</div>
+        <div class="cs-cd-colon">:</div>
+        <div class="cs-cd-item">
+          <div class="cs-cd-box" id="cs-seconds">00</div>
+          <div class="cs-cd-label">Seconds</div>
         </div>
       </div>
     {% endif %}
 
-    <div class="coming-soon-form">
-      {% form 'customer', class: 'newsletter-form' %}
+    <div class="cs-form-wrapper">
+      {% form 'customer', class: 'cs-nl-form' %}
         <input type="hidden" name="contact[tags]" value="newsletter">
-        <div class="newsletter-form__field-wrapper">
-          <div class="field">
+
+        {%- if form.posted_successfully? -%}
+          <div class="cs-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            You're on the list! We'll notify you when we launch.
+          </div>
+        {%- else -%}
+          <div class="cs-form">
             <input
-              id="NewsletterForm--{{ section.id }}"
+              id="cs-email-{{ section.id }}"
               type="email"
-              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               name="contact[email]"
-              class="field__input field newsletter-form__field"
-              value="{{ form.email }}"
-              aria-required="true"
-              autocorrect="off"
-              autocapitalize="off"
               autocomplete="email"
-              placeholder="{{ 'newsletter.label' | t | default: 'Email address' }}"
+              placeholder="{{ section.settings.email_placeholder }}"
               required
+              value="{{ form.email }}"
             >
-            <label class="field__label visually-hidden" for="NewsletterForm--{{ section.id }}">
-              {{ 'newsletter.label' | t | default: 'Email address' }}
-            </label>
+            <button type="submit">{{ section.settings.button_label }}</button>
           </div>
           {%- if form.errors -%}
-            <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
-              {%- render 'icon-error' -%}
-              {{- form.errors.translated_fields.email | capitalize }}
-              {{ form.errors.messages.email -}}
-            </small>
+            <p class="cs-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
           {%- endif -%}
-          <button type="submit" class="newsletter__button button button--tertiary" name="commit">
-            <span class="button-label">{{ 'newsletter.button_label' | t | default: 'Notify me' }}</span>
-          </button>
-        </div>
-        {%- if form.posted_successfully? -%}
-          <h3 class="newsletter-form__message newsletter-form__message--success form__message" tabindex="-1" autofocus>
-            {% render 'icon-success' -%}
-            {{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}
-          </h3>
+          <p class="cs-form-hint">{{ section.settings.form_hint }}</p>
         {%- endif -%}
       {% endform %}
     </div>
+
+    {% if section.settings.show_social %}
+      <div class="cs-divider"><span>Follow Our Journey</span></div>
+      <div class="cs-social">
+        {% if section.settings.social_instagram != blank %}
+          <a href="{{ section.settings.social_instagram }}" target="_blank" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.social_twitter != blank %}
+          <a href="{{ section.settings.social_twitter }}" target="_blank" aria-label="X (Twitter)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.social_facebook != blank %}
+          <a href="{{ section.settings.social_facebook }}" target="_blank" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
-</div>
+
+  <p class="cs-footer">{{ shop.name }} &mdash; &copy; {{ 'now' | date: '%Y' }}. All rights reserved.</p>
+</section>
 
 {% if section.settings.show_countdown and section.settings.launch_date != blank %}
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const launchDateString = "{{ section.settings.launch_date }}";
-    // Try to parse the date. Format expected: YYYY-MM-DD
-    const countDownDate = new Date(launchDateString).getTime();
+  (function() {
+    const target = new Date("{{ section.settings.launch_date }}T00:00:00").getTime();
+    const els = {
+      days:    document.getElementById('cs-days'),
+      hours:   document.getElementById('cs-hours'),
+      minutes: document.getElementById('cs-minutes'),
+      seconds: document.getElementById('cs-seconds')
+    };
+    if (!els.days || isNaN(target)) return;
 
-    if (isNaN(countDownDate)) {
-        console.error("Invalid launch date format. Please use YYYY-MM-DD.");
-        return;
-    }
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
-    const timer = setInterval(function() {
-      const now = new Date().getTime();
-      const distance = countDownDate - now;
-
-      if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById("days").innerHTML = "00";
-        document.getElementById("hours").innerHTML = "00";
-        document.getElementById("minutes").innerHTML = "00";
-        document.getElementById("seconds").innerHTML = "00";
+    function tick() {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        Object.values(els).forEach(el => el.textContent = '00');
         return;
       }
+      els.days.textContent    = pad(Math.floor(diff / 86400000));
+      els.hours.textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+      els.minutes.textContent = pad(Math.floor((diff % 3600000) / 60000));
+      els.seconds.textContent = pad(Math.floor((diff % 60000) / 1000));
+    }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
-      document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
-      document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
-      document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
-    }, 1000);
-  });
+    tick();
+    setInterval(tick, 1000);
+  })();
 </script>
 {% endif %}
 
@@ -266,32 +470,82 @@
 {
   "name": "Coming Soon",
   "tag": "section",
-  "class": "section",
   "settings": [
     {
       "type": "text",
-      "id": "heading",
-      "default": "Something Amazing Is Coming",
-      "label": "Heading"
+      "id": "badge_text",
+      "default": "Coming Soon",
+      "label": "Badge Text"
     },
     {
-      "type": "richtext",
-      "id": "text",
-      "default": "<p>We are working hard to bring you a new experience. Subscribe to be the first to know when we launch.</p>",
-      "label": "Subheading"
+      "type": "text",
+      "id": "headline_plain",
+      "default": "We're Building",
+      "label": "Headline (Plain)"
+    },
+    {
+      "type": "text",
+      "id": "headline_gradient",
+      "default": "Something Extraordinary",
+      "label": "Headline (Gradient Color)"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Our new store is on its way. Join the waitlist to get early access and exclusive offers when we go live.",
+      "label": "Subtext"
     },
     {
       "type": "checkbox",
       "id": "show_countdown",
       "default": true,
-      "label": "Show countdown timer"
+      "label": "Show Countdown Timer"
     },
     {
       "type": "text",
       "id": "launch_date",
       "label": "Launch Date (YYYY-MM-DD)",
       "default": "2026-12-31",
-      "info": "Used for the countdown timer. Format must be YYYY-MM-DD"
+      "info": "Format must be YYYY-MM-DD"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "default": "Enter your email address",
+      "label": "Email Placeholder"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Notify Me",
+      "label": "Button Label"
+    },
+    {
+      "type": "text",
+      "id": "form_hint",
+      "default": "No spam, ever. Unsubscribe anytime.",
+      "label": "Form Hint Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": false,
+      "label": "Show Social Links"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_twitter",
+      "label": "X (Twitter) URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
     }
   ],
   "presets": [
