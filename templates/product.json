@@ -1,0 +1,315 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "Nordic Charcoal"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "additional_text": {
+          "type": "additional_text",
+          "settings": {
+            "text": "<p>A perfect blend of timeless elegance and contemporary design, crafted to add a touch of luxury to any ensemble.</p>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_quantity": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "inventory": {
+          "type": "inventory",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description_heading": "Description",
+            "default_open": false,
+            "description_variants": "collapsible"
+          }
+        },
+        "about": {
+          "type": "about",
+          "settings": {
+            "about_heading": "Care",
+            "about_heading_content": "<ul><li>Avoid contact with harsh chemicals.</li><li>Store in a cool, dry place away from sunlight.</li><li>Clean regularly with a soft cloth.</li><li>Consider professional cleaning for delicate pieces.</li><li>Remove before swimming or exercising.</li></ul>"
+          }
+        },
+        "about-2": {
+          "type": "about",
+          "settings": {
+            "about_heading": "Shipping & Returns",
+            "about_heading_content": "<ul><li>Items typically ship within 2-5 business days.</li><li>Track your order with real-time updates.</li><li>30-day return policy for a full refund or exchange.</li><li>Easy online return process with customer support assistance.</li></ul>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "show_share_facebook": true,
+            "show_share_twitter": true,
+            "show_share_pinterest": true,
+            "show_share_copy": true
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "additional_text",
+        "variant_picker",
+        "buy_buttons",
+        "inventory",
+        "description",
+        "about",
+        "about-2",
+        "share"
+      ],
+      "settings": {
+        "image_gallery_collage": "thumbnail_carousel",
+        "desktop_alignment": "left",
+        "mobile_alignment": "after",
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "enable_autoheight": false,
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent"
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "ABOUT"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Crafting Timeless Elegance with Each Sparkling Creation",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each jewel is a masterpiece, meticulously designed to embody timeless elegance and unparalleled sparkle.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "container_size": "small",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "xs",
+        "padding_bottom": "l",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "grid-banner": {
+      "type": "grid-banner",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": {
+            "button_link_url": "",
+            "overlay_opacity": 20,
+            "text_reverse": false,
+            "subheading": "NEWEST",
+            "subheading_second": "JEWELRY SETS",
+            "heading": "Embrace the Latest Trends in Contemporary Jewels",
+            "heading_size": "large",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "column-2": {
+          "type": "column",
+          "settings": {
+            "button_link_url": "",
+            "overlay_opacity": 20,
+            "text_reverse": false,
+            "subheading": "Classics",
+            "subheading_second": "",
+            "heading": "Reveal Your Radiance",
+            "heading_size": "small",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": {
+            "button_link_url": "",
+            "overlay_opacity": 20,
+            "text_reverse": false,
+            "subheading": "RINGS",
+            "subheading_second": "",
+            "heading": "Celebrate Sophistication",
+            "heading_size": "small",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3"
+      ],
+      "settings": {
+        "color_scheme": "background-2",
+        "section_heading": "New Collections",
+        "image_ratio": "square",
+        "margin_top": "no-indent",
+        "margin_bottom": "s",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "product-markers": {
+      "type": "product-markers",
+      "blocks": {
+        "product-marker-1": {
+          "type": "product-marker",
+          "settings": {
+            "marker_background": "#ffffff",
+            "marker_color": "#000000",
+            "marker_background_hover": "#000000",
+            "marker_color_hover": "#ffffff",
+            "position_x": 20,
+            "position_y": 79,
+            "border_radius": 2
+          }
+        },
+        "product_marker_CLbdFt": {
+          "type": "product-marker",
+          "settings": {
+            "marker_background": "#ffffff",
+            "marker_color": "#000000",
+            "marker_background_hover": "#000000",
+            "marker_color_hover": "#ffffff",
+            "position_x": 60,
+            "position_y": 8,
+            "border_radius": 2
+          }
+        },
+        "product-marker-2": {
+          "type": "product-marker",
+          "settings": {
+            "marker_background": "#ffffff",
+            "marker_color": "#000000",
+            "marker_background_hover": "#000000",
+            "marker_color_hover": "#ffffff",
+            "position_x": 48,
+            "position_y": 74,
+            "border_radius": 2
+          }
+        }
+      },
+      "block_order": [
+        "product-marker-1",
+        "product_marker_CLbdFt",
+        "product-marker-2"
+      ],
+      "settings": {
+        "heading": "Shop the Look",
+        "description": "",
+        "overlay_opacity": 0,
+        "show_secondary_image": true,
+        "show_sku": false,
+        "show_vendor": false,
+        "show_collection_name": true,
+        "image_ratio": "portrait",
+        "letter_spacing": -0.3,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "xs",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "products_limit": 4,
+        "heading": "You May Also Like",
+        "description": "",
+        "button_label": "Shop All",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "two_cards": false,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "show_collection_name": true,
+        "show_secondary_image": true,
+        "show_sku": false,
+        "show_vendor": false,
+        "show_color_swatch": true,
+        "show_desc": false,
+        "padding_top": "s",
+        "padding_bottom": "xs",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich-text",
+    "grid-banner",
+    "product-markers",
+    "product-recommendations"
+  ]
+}

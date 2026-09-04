@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "t:sections.header.settings.header-group.label",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "burger_menu": {
+          "type": "burger_menu",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "burger_menu"
+      ],
+      "settings": {
+        "height": 50,
+        "logo_width": 160,
+        "menu": "",
+        "color_scheme": "",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "sticky_header_type": "on-scroll-up",
+        "logo_position": "left",
+        "enable_border_bottom": true,
+        "header_overlay": false,
+        "enable_search": true
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

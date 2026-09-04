@@ -1,0 +1,66 @@
+{% comment %}
+  Renders product variant options
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
+  Usage:
+  {% render 'product-variant-options',
+    product: product,
+    option: option,
+    block: block
+  %}
+{% endcomment %}
+
+{%- for value in option.values -%}
+  {% liquid
+    assign color_trigger = settings.trigger_swatch | handle | strip
+    assign name_option = option.name | handle | strip
+  %}
+
+  {% if settings.show_color_swatch and color_trigger == name_option %}
+    {% liquid
+      assign color_value = value | handle | strip
+      assign color_value_custom = color_value
+
+      if settings.custom_colors != blank
+        assign custom_colors_string = settings.custom_colors | strip
+        assign custom_colors_obj = custom_colors_string | newline_to_br | split: '<br />'
+
+        for obj in custom_colors_obj
+          assign obj_strip = obj | strip
+          assign obj_key = obj_strip | split: ':' | first
+          assign obj_value = obj_strip | split: ':' | last
+          assign obj_color_name = obj_key | handle | strip
+
+          if color_value == obj_color_name
+            assign obj_color_value = obj_value
+            assign color_value_custom = obj_color_value | strip
+            break
+          endif
+        endfor
+      endif
+    %}
+
+    {% liquid
+      if color_value_custom == 'white' or color_value_custom == '#fff' or color_value_custom == '#ffffff' or color_value_custom == '255,255,255' or color_value_custom == '255,255,255,1'
+        assign swatch_bg = 'rgb(var(--color-border))'
+        assign disable_color = 'rgb(var(--color-foreground-title))'
+        assign checkbox_bg = 'rgb(var(--color-border))'
+        assign swatch_border = 'transparent'
+      else
+        assign swatch_bg = 'transparent'
+        assign disable_color = 'white'
+        assign checkbox_bg = 'white'
+        assign swatch_border = 'rgba(var(--color-border),0.5)'
+      endif
+    %}
+    <label
+      for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}-{{ product.id }}"
+      class="color-swatch"
+      title="{{ value }}"
+      style="--swatch-color: {{ color_value_custom | remove: '-' }}; --swatch-bg: {{ swatch_bg }}; --swatch-border: {{ swatch_border }};--disable-color:{{ disable_color }};--checkbox-bg: {{ checkbox_bg }}; border-radius: {{ settings.swatch_border_radius }}%"
+    >
+    </label>
+  {% endif %}
+{%- endfor -%}

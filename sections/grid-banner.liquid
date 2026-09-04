@@ -1,0 +1,523 @@
+{{ 'section-grid-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {% render 'section-margin' %}
+
+  .cards-grid__wrapper {
+  	grid-template-columns: 1fr;
+  }
+
+
+   @media screen and (max-width: 990px) {
+  	.cards-grid__item {
+  		grid-column-start: auto !important;
+  		grid-column-end: auto !important;
+  		grid-row-start: auto !important;
+  		grid-row-end: auto !important;
+  	}
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .cards-grid__wrapper {
+  		grid-template-columns: repeat(4, 1fr);
+    }
+  	#shopify-section-{{ section.id }} .section_block_count {
+  		grid-template-columns: repeat(1, 1fr);
+    }
+  }
+{%- endstyle -%}
+
+{% liquid
+  case section.settings.image_ratio
+    when 'landscape'
+      assign section_size = '41%'
+    when 'portrait'
+      assign section_size = '46%'
+    when 'square'
+      assign section_size = '56%'
+    else
+      assign section_size = '60%'
+  endcase
+%}
+<div class="cards-grid {% if section.settings.enable_border_top %} section_border_top{% endif %}{% if section.settings.enable_border_bottom %} section_border_bottom{% endif %}">
+  {% render 'section-header' %}
+  <div class="container">
+    <div class="cards-grid__wrapper-box ">
+      {%- if section.settings.section_heading != blank -%}
+        <{{ section.settings.section_heading_tag }} class="section-header__title title--section h2">
+          <span class="section-header__text">
+            {{- section.settings.section_heading -}}
+          </span>
+        </{{ section.settings.section_heading_tag }}>
+      {% endif %}
+      {% assign block_count = section.blocks | size %}
+      <div class="cards-grid__wrapper {% if section.settings.section_heading != blank %} cards-grid__hide{% endif %} {% if block_count == 1 %} section_block_count{% endif %} {% if section.settings.section_heading != blank %} cards-grid__border{% endif %} {% if section.blocks.size == 2 %} cards-grid__wrapper-2 {% elsif section.blocks.size == 3 %} cards-grid__wrapper-3 {% endif %}">
+        {%- for block in section.blocks -%}
+          {% liquid
+            case block.settings.heading_size
+              when 'extra small'
+                assign heading_size = 'h5'
+              when 'small'
+                assign heading_size = 'h4'
+              when 'medium'
+                assign heading_size = 'h3'
+              when 'large'
+                assign heading_size = 'h2'
+              else
+                assign heading_size = 'h2'
+            endcase
+          %}
+
+          <div
+            class="cards-grid__item  have-overlay color-{{ section.settings.color_scheme }} background {{ block_class }}"
+            {{ block.shopify_attributes }}
+            data-id="{{ block.id }}"
+          >
+            {% if block_count != 1 %}
+              <span class="cards-grid__item_border"></span>
+            {% endif %}
+            <div class="cards-grid__item-list">
+              {% style %}
+                [data-id="{{ block.id }}"].have-overlay {
+                	--overlay-alpha : {{ block.settings.overlay_opacity }}%;
+                	--block-height: {{ section_size }};
+                	border-radius: var(--border-radius-media);
+                }
+              {% endstyle %}
+
+              {%- if block.settings.image != blank and block.settings.video == blank -%}
+                {%- capture sizes -%}
+							(min-width: 1920px) calc(100vw - 100px),
+							(min-width: 750px) calc((100vw - 50px)), calc((100vw - 50px) / 2)
+						{%- endcapture -%}
+                {%- assign image_height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 3840
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '100vw,(min-width: 1100px) 50vw',
+                    widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                    height: image_height,
+                    class: 'cards-grid__image'
+                }}
+              {%- elsif block.settings.video != blank -%}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    image_size: '1100x',
+                    autoplay: true,
+                    loop: true,
+                    controls: false,
+                    muted: true,
+                    class: 'cards-grid__image data-alt'
+                }}
+              {%- else %}
+                {% assign collection_index = forloop.index | modulo: 3 | plus: 1 %}
+                {{
+                  'collection-'
+                  | append: collection_index
+                  | placeholder_svg_tag: 'placeholder-svg cards-grid__image placeholder'
+                }}
+              {%- endif -%}
+              {%- if block.settings.button_link_url != blank -%}
+                <a
+                  class="cards-grid__wrapper_link"
+                  href="{{ block.settings.button_link_url }}"
+                  aria-label="card link"
+                >
+                </a>
+              {%- endif -%}
+              <div class="cards-grid__wrapper__content {% if block.settings.text_reverse %} cards-grid__reverse {% endif %}">
+                <div class="cards-grid-item-btns">
+                  {% if block.settings.subheading != blank %}
+                    <div class="cards-grid__subheading subtitle">
+                      {{ block.settings.subheading }}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.subheading_second != blank %}
+                    <div class="cards-grid__subheading subtitle">
+                      {{ block.settings.subheading_second }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="cards-grid__info">
+                  {%- if block.settings.heading != blank -%}
+                    <{{ block.settings.heading_tag }} class="cards-grid__heading {{ heading_size }}">
+                      {{ block.settings.heading | escape }}
+                    </{{ block.settings.heading_tag }}>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="richtext__content  cards-grid-text">
+                      {{ block.settings.text }}
+                    </div>
+                  {%- endif -%}
+                  {%- if block.settings.button_label != blank -%}
+                    <div class="cards-grid__button-wrapper">
+                      {% render 'button', layout: block, btn_style: 'simple' %}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.cards-grid.name",
+  "class": "spaced-section cards-grid-section",
+  "tag": "section",
+  "max_blocks": 8,
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+
+    {
+      "type": "inline_richtext",
+      "id": "section_heading",
+      "default": "t:sections.cards-grid.settings.section_heading.default",
+      "label": "t:sections.all.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "section_heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.all.heading_tag.options__8.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info",
+      "visible_if": "{{ section.settings.section_heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "t:sections.cards-grid.blocks.column.size.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.cards-grid.blocks.column.size.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.cards-grid.blocks.column.size.options__3.label"
+        }
+      ],
+      "default": "landscape",
+      "label": "t:sections.all.image.ratio.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.border.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_top",
+      "default": true,
+      "label": "t:sections.all.border.border_enable_top.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_bottom",
+      "default": true,
+      "label": "t:sections.all.border.border_enable_bottom.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "limit": 3,
+      "name": "t:sections.cards-grid.blocks.column.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.cards-grid.blocks.column.settings.image.label"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "t:sections.all.video.label"
+        },
+
+        {
+          "type": "url",
+          "id": "button_link_url",
+          "label": "t:sections.all.button.link.label"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "default": 20,
+          "unit": "%",
+          "label": "t:sections.all.overlay_opacity.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_reverse",
+          "default": false,
+          "label": "t:sections.cards-grid.blocks.column.settings.column_reverse.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "t:sections.all.subheading.label_1",
+          "default": "t:sections.cards-grid.blocks.column.size.subheading.default"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading_second",
+          "label": "t:sections.all.subheading.label_2",
+          "default": "t:sections.cards-grid.blocks.column.size.subheading_second.default"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "t:sections.cards-grid.blocks.column.size.heading.default",
+          "label": "t:sections.all.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "default": "medium",
+          "label": "t:sections.cards-grid.settings.heading_size.label",
+          "options": [
+            {
+              "value": "extra small",
+              "label": "t:sections.cards-grid.settings.heading_size.option_1"
+            },
+            {
+              "value": "small",
+              "label": "t:sections.cards-grid.settings.heading_size.option_2"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.cards-grid.settings.heading_size.option_3"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.cards-grid.settings.heading_size.option_4"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_tag.options__1.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_tag.options__2.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.all.heading_tag.options__3.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.heading_tag.options__4.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:sections.all.heading_tag.options__5.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:sections.all.heading_tag.options__6.label"
+            },
+            {
+              "value": "div",
+              "label": "t:sections.all.heading_tag.options__7.label"
+            },
+            {
+              "value": "p",
+              "label": "t:sections.all.heading_tag.options__8.label"
+            }
+          ],
+          "default": "h2",
+          "label": "t:sections.all.heading_tag.label",
+          "info": "t:sections.all.heading_tag.info",
+          "visible_if": "{{ block.settings.heading != blank }}"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "t:sections.cards-grid.blocks.column.size.text.default",
+          "label": "t:sections.all.text.label"
+        },
+
+        {
+          "type": "header",
+          "content": "t:sections.all.button.header.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "t:sections.cards-grid.blocks.column.size.button_label.default",
+          "label": "t:sections.all.button.label.label",
+          "info": "t:sections.all.button.label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.all.button.link.label"
+        },
+
+        {
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.all.button.style.options__1.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.all.button.style.options__2.label"
+            },
+            {
+              "value": "tertiary",
+              "label": "t:sections.all.button.style.options__3.label"
+            }
+          ],
+          "default": "primary",
+          "label": "t:sections.all.button.style.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_arrow",
+          "default": false,
+          "label": "t:sections.all.button.arrow.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.cards-grid.name",
+
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {}
+        },
+        {
+          "type": "column",
+          "settings": {}
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

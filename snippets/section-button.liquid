@@ -1,0 +1,33 @@
+{% liquid
+  if custom_settings
+    assign section_button_label = section_button_label
+    assign section_button_link = section_button_link
+    assign section_button_style = section_button_style
+    assign section_enable_arrow = section_enable_arrow
+  else
+    assign section_button_label = section.settings.button_label
+    assign section_button_link = section.settings.button_link
+    assign section_button_style = section.settings.button_style
+    assign section_enable_arrow = section.settings.button_arrow
+  endif
+%}
+{% if section_button_label != blank %}
+  <div class="section-button__line">
+    <div class="container">
+      <div class="section-button__item">
+        {% if blog_button == true %}
+          {% render 'button', layout: section, blog_link: section.settings.blog.url %}
+        {% elsif button_icon == true %}
+          {% render 'button', layout: section, simple: true, icon: true %}
+        {% else %}
+          {% render 'button',
+            btn_label: section_button_label,
+            btn_link: section_button_link,
+            btn_style: section_button_style,
+            enable_arrow: section_enable_arrow
+          %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

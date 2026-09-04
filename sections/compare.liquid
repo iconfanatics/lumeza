@@ -1,0 +1,181 @@
+{{ 'img-comparison.css' | asset_url | stylesheet_tag }}
+{{ 'section-compare.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'img-comparison.js' | asset_url }}" defer="defer"></script>
+
+{% style %}
+  {% render 'section-margin' %}
+{% endstyle %}
+
+<div class="compare">
+  <div class="compare__content content">
+    <div
+      class="compare__container"
+      style="--opacity_overlay: {{ section.settings.overlay_opacity }}"
+    >
+      {%- if section.settings.image_before != blank and section.settings.image_after != blank -%}
+        <img-comparison-slider>
+          <figure class="compare__figure" slot="first">
+            {{
+              section.settings.image_before
+              | image_url: width: section.settings.image_before.width
+              | image_tag:
+                loading: 'lazy',
+                widths: '575, 750, 990, 1200, 1360, 1500, 1632, 1900, 2200, 2500, 2800, 3100, 3264, 3400, 3700, 3900',
+                sizes: '100vw'
+            }}
+            <figcaption class="compare__text badge compare__text--left">
+              {%- if section.settings.text_left != blank -%}
+                {{ section.settings.text_left }}
+              {%- endif -%}
+            </figcaption>
+          </figure>
+          <figure class="compare__figure" slot="second">
+            {{
+              section.settings.image_after
+              | image_url: width: section.settings.image_after.width
+              | image_tag:
+                loading: 'lazy',
+                widths: '575, 750, 990, 1200, 1360, 1500, 1632, 1900, 2200, 2500, 2800, 3100, 3264, 3400, 3700, 3900',
+                sizes: '100vw'
+            }}
+            <figcaption class="compare__text badge compare__text--right">
+              {%- if section.settings.text_right != blank -%}
+                {{ section.settings.text_right }}
+              {%- endif -%}
+            </figcaption>
+          </figure>
+          <div class="compare__handle" slot="handle">
+            {% render 'icon-handle' %}
+          </div>
+        </img-comparison-slider>
+      {%- else -%}
+        <div class="compare__default">
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+          {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        </div>
+        {%- if section.settings.text_left != blank -%}
+          <div class="compare__text badge compare__text--left">
+            {{ section.settings.text_left }}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.text_right != blank -%}
+          <div class="compare__text badge compare__text--right">
+            {{ section.settings.text_right }}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.compare-block.name",
+  "tag": "section",
+  "class": "section-compare",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "t:sections.compare-block.settings.image_before.label",
+      "info": "t:sections.compare-block.settings.image_before.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "t:sections.compare-block.settings.image_after.label",
+      "info": "t:sections.compare-block.settings.image_before.info"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "t:sections.all.overlay_opacity.label",
+      "default": 0.3
+    },
+    {
+      "type": "text",
+      "id": "text_left",
+      "default": "t:sections.compare-block.settings.text_left.default",
+      "label": "t:sections.compare-block.settings.text_left.label"
+    },
+    {
+      "type": "text",
+      "id": "text_right",
+      "default": "t:sections.compare-block.settings.text_right.default",
+      "label": "t:sections.compare-block.settings.text_right.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.compare-block.presets.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,156 @@
+{{ 'ticker.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'ticker.js' | asset_url }}" defer="defer"></script>
+{% style %}
+  {% render 'section-margin' %}
+{% endstyle %}
+<div
+  class="{% if section.settings.enable_border_top %} section_border_top{% endif %}{% if section.settings.enable_border_bottom %} section_border_bottom{% endif %}	ticker  color-{{ section.settings.color_scheme }} background"
+  data-date="{{ section.settings.date_picker }}"
+  data-ticker-speed="{{ section.settings.ticker_speed }}"
+  data-ticker-id="{{ section.id }}"
+  style="padding-top: {{ section.settings.ticker_padding }}px; padding-bottom: {{ section.settings.ticker_padding }}px"
+>
+  <div class="swiper container ticker-js-{{ section.id }}">
+    <div class="swiper-wrapper">
+      {%- if section.settings.ticker_text != blank -%}
+        {% for i in (1..100) %}
+          <div class="swiper-slide">
+            <div class="ticker__title">
+              <h6 style="font-size: {{ section.settings.ticker_font }}px">
+                {{ section.settings.ticker_text }}
+              </h6>
+            </div>
+          </div>
+        {% endfor %}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.ticker.name",
+  "tag": "section",
+  "class": "ticker-section",
+  "enabled_on": {
+    "templates": ["*"],
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "ticker_text",
+      "default": "t:sections.ticker.settings.ticker_text.default",
+      "label": "t:sections.ticker.settings.ticker_text.label"
+    },
+    {
+      "type": "range",
+      "id": "ticker_speed",
+      "min": 0,
+      "max": 6,
+      "step": 0.1,
+      "default": 5,
+      "unit": "s",
+      "label": "t:sections.ticker.settings.ticker_speed.label"
+    },
+    {
+      "type": "range",
+      "id": "ticker_font",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.ticker.settings.ticker_font.label",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "m",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.border.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_top",
+      "default": true,
+      "label": "t:sections.all.border.border_enable_top.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_bottom",
+      "default": true,
+      "label": "t:sections.all.border.border_enable_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.ticker.presets.name"
+    }
+  ]
+}
+{% endschema %}

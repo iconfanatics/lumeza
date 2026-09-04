@@ -1,0 +1,758 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slideshow-slide-2": {
+          "type": "slideshow_item",
+          "settings": {
+            "color_scheme": "background-2",
+            "heading": "Your Story with Custom Jewelry",
+            "heading_level": "small",
+            "text": "<p>Personalize your style by designing your own jewelry, making each piece uniquely yours.</p>",
+            "slide_link": "",
+            "button_label": "Shop All",
+            "button_style": "secondary",
+            "button_arrow": false,
+            "second_button_label": "Explore New Arrivals",
+            "second_button_arrow": true,
+            "overlay_opacity": 20
+          }
+        },
+        "slideshow-slide-0": {
+          "type": "slideshow_item",
+          "settings": {
+            "color_scheme": "background-2",
+            "heading": "Timeless Treasures for Every Occasion",
+            "heading_level": "small",
+            "text": "<p>Explore our selection of classic jewelry, perfect for making every occasion memorable.</p>",
+            "slide_link": "",
+            "button_label": "Shop All",
+            "button_style": "secondary",
+            "button_arrow": false,
+            "second_button_label": "Explore New Arrivals",
+            "second_button_arrow": true,
+            "overlay_opacity": 20
+          }
+        },
+        "slideshow-slide-1": {
+          "type": "slideshow_item",
+          "settings": {
+            "color_scheme": "background-2",
+            "heading": "Cherish the Glow of Gold Jewelry as Wearable Art",
+            "heading_level": "small",
+            "text": "<p>Discover our range of gold jewelry to add that luxurious touch to any outfit.</p>",
+            "slide_link": "",
+            "button_label": "Shop All",
+            "button_style": "secondary",
+            "button_arrow": false,
+            "second_button_label": "Explore New Arrivals",
+            "second_button_arrow": true,
+            "overlay_opacity": 20
+          }
+        }
+      },
+      "block_order": [
+        "slideshow-slide-2",
+        "slideshow-slide-0",
+        "slideshow-slide-1"
+      ],
+      "settings": {
+        "section_layout": "full",
+        "section_alignment": "center",
+        "vertical_alignment": "flex-start",
+        "text_animation": true,
+        "image_size": "21/9",
+        "is_autoplay": true,
+        "is_hover_stop_autoplay": false,
+        "show_navigation": true,
+        "show_pagination": true,
+        "parallax": false,
+        "slideshow_speed": 1.1,
+        "slideshow_delay": 3,
+        "slide_effects": "fade",
+        "margin_top": "xs",
+        "margin_bottom": "xs"
+      }
+    },
+    "collection-grid": {
+      "type": "collection-grid",
+      "blocks": {
+        "categories-1": {
+          "type": "categories",
+          "settings": {}
+        },
+        "categories-2": {
+          "type": "categories",
+          "settings": {}
+        },
+        "categories-3": {
+          "type": "categories",
+          "settings": {}
+        },
+        "categories-4": {
+          "type": "categories",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "categories-1",
+        "categories-2",
+        "categories-3",
+        "categories-4"
+      ],
+      "settings": {
+        "columns": 4,
+        "heading": "Shop by Category",
+        "heading_tag": "h2",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "image_ratio": "square",
+        "card_type": "standart",
+        "text_center": "center",
+        "card_type_text": "overlay",
+        "overlay_opacity": 20,
+        "show_collection_desc": true,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "xs",
+        "padding_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    },
+    "popular-products": {
+      "type": "popular-products",
+      "settings": {
+        "heading": "bestsellers",
+        "heading_tag": "h2",
+        "description": "",
+        "button_label": "Shop Bestsellers",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "two_cards": false,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "show_collection_name": true,
+        "show_secondary_image": true,
+        "show_sku": false,
+        "show_vendor": false,
+        "show_color_swatch": true,
+        "show_desc": false,
+        "card_heading_tag": "h3",
+        "padding_top": "s",
+        "padding_bottom": "xs",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "image-banner": {
+      "type": "image-banner",
+      "settings": {
+        "block_type": "overlay",
+        "animation_position": "center",
+        "color_scheme": "background-2",
+        "heading": "Celebrate Uniqueness with Bespoke Jewelry Designs Tailored Just for You",
+        "heading_size": "medium",
+        "heading_tag": "h2",
+        "description": "<p>Immerse yourself in a world where each piece of jewelry is a masterpiece, uniquely crafted to bring out your individual elegance and style.</p>",
+        "text_align": "center",
+        "button_label": "Shop Collection",
+        "button_style": "secondary",
+        "button_arrow": false,
+        "simple_button_label": "Explore New Arrivals",
+        "simple_button_arrow": true,
+        "image_size": "small",
+        "overlay_opacity": 20,
+        "subheading": "",
+        "subheading_second": "",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "popular-products-2": {
+      "type": "popular-products",
+      "settings": {
+        "heading": "new arrivals",
+        "heading_tag": "h2",
+        "description": "",
+        "button_label": "Shop New Arrivals",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "two_cards": false,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "show_collection_name": true,
+        "show_secondary_image": true,
+        "show_sku": false,
+        "show_vendor": false,
+        "show_color_swatch": true,
+        "show_desc": false,
+        "card_heading_tag": "h3",
+        "padding_top": "s",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": false
+      }
+    },
+    "product-markers": {
+      "type": "product-markers",
+      "blocks": {
+        "product-marker-1": {
+          "type": "product-marker",
+          "settings": {
+            "marker_background": "#ffffff",
+            "marker_color": "#000000",
+            "marker_background_hover": "#000000",
+            "marker_color_hover": "#ffffff",
+            "position_x": 20,
+            "position_y": 79,
+            "border_radius": 2
+          }
+        },
+        "product_marker_CLbdFt": {
+          "type": "product-marker",
+          "settings": {
+            "marker_background": "#ffffff",
+            "marker_color": "#000000",
+            "marker_background_hover": "#000000",
+            "marker_color_hover": "#ffffff",
+            "position_x": 60,
+            "position_y": 8,
+            "border_radius": 2
+          }
+        },
+        "product-marker-2": {
+          "type": "product-marker",
+          "settings": {
+            "marker_background": "#ffffff",
+            "marker_color": "#000000",
+            "marker_background_hover": "#000000",
+            "marker_color_hover": "#ffffff",
+            "position_x": 48,
+            "position_y": 74,
+            "border_radius": 2
+          }
+        }
+      },
+      "block_order": [
+        "product-marker-1",
+        "product_marker_CLbdFt",
+        "product-marker-2"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_tag": "h2",
+        "description": "",
+        "overlay_opacity": 0,
+        "default_active_first": true,
+        "show_secondary_image": true,
+        "show_sku": false,
+        "show_vendor": false,
+        "show_collection_name": true,
+        "image_ratio": "portrait",
+        "letter_spacing": -0.3,
+        "card_heading_tag": "h2",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "grid-banner": {
+      "type": "grid-banner",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": {
+            "overlay_opacity": 20,
+            "text_reverse": false,
+            "subheading": "JEWELRY SETS",
+            "subheading_second": "",
+            "heading": "Embrace Modern Jewelry Trends",
+            "heading_size": "large",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "column-2": {
+          "type": "column",
+          "settings": {
+            "overlay_opacity": 20,
+            "text_reverse": false,
+            "subheading": "EARRINGS",
+            "subheading_second": "",
+            "heading": "Reveal Your Radiance",
+            "heading_size": "small",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": {
+            "overlay_opacity": 20,
+            "text_reverse": false,
+            "subheading": "RINGS",
+            "subheading_second": "",
+            "heading": "Radiate Elegance",
+            "heading_size": "small",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3"
+      ],
+      "settings": {
+        "color_scheme": "background-2",
+        "section_heading": "On Sale Now",
+        "section_heading_tag": "h2",
+        "image_ratio": "square",
+        "margin_top": "no-indent",
+        "margin_bottom": "s",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonials_tab-1": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"Absolutely adore my new necklace! Exceptional craftsmanship and truly a treasured piece.\"",
+            "logo_width": 140,
+            "author_name": "Emily Robinson",
+            "author_position": "Fashion Expert"
+          }
+        },
+        "testimonials_tab-2": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"Every wear of my earrings brings compliments. Beautiful, comfortable, and utterly captivating.\"",
+            "logo_width": 140,
+            "author_name": "Sarah Johnson",
+            "author_position": "Finance Analyst"
+          }
+        },
+        "testimonials_tab-3": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"Outstanding customer service and quality. My anniversary bracelet has become my favorite piece.\"",
+            "logo_width": 140,
+            "author_name": "Michael Thompson",
+            "author_position": "Manager"
+          }
+        },
+        "testimonials_tab-4": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"Found a unique, high-quality ring for a special occasion. It’s a standout piece that makes me feel special.\"",
+            "logo_width": 140,
+            "author_name": "Lisa Wang",
+            "author_position": "Fashion Blogger"
+          }
+        },
+        "testimonials_tab_gqtdBW": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"Impressed by the artistry and quality. Each piece is a masterpiece, clearly made with the finest materials.\"",
+            "logo_width": 140,
+            "author_name": "David Martinez",
+            "author_position": "Designer"
+          }
+        },
+        "testimonials_tab_EHmkbA": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"My go-to for exquisite jewelry. Their pieces are consistently stunning and of unparalleled quality.\"",
+            "logo_width": 140,
+            "author_name": "Rachel Kim",
+            "author_position": "Business Analyst"
+          }
+        }
+      },
+      "block_order": [
+        "testimonials_tab-1",
+        "testimonials_tab-2",
+        "testimonials_tab-3",
+        "testimonials_tab-4",
+        "testimonials_tab_gqtdBW",
+        "testimonials_tab_EHmkbA"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "subheading": "TESTIMONIALS",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent"
+      }
+    },
+    "blog-post": {
+      "type": "blog-post",
+      "blocks": {
+        "article_block-1": {
+          "type": "article_block",
+          "settings": {
+            "card_type": "overlay",
+            "overlay_opacity": 30,
+            "show_image": true,
+            "show_tags": true,
+            "show_date": false,
+            "show_author": true,
+            "show_excerpt": true,
+            "image_ratio": "landscape",
+            "image_fit": "cover",
+            "heading_size": "h3",
+            "heading_tag": "h2"
+          }
+        },
+        "article_block-2": {
+          "type": "article_block",
+          "settings": {
+            "card_type": "reverse",
+            "overlay_opacity": 30,
+            "show_image": true,
+            "show_tags": true,
+            "show_date": false,
+            "show_author": true,
+            "show_excerpt": false,
+            "image_ratio": "square",
+            "image_fit": "cover",
+            "heading_size": "h5",
+            "heading_tag": "h2"
+          }
+        },
+        "article_block-3": {
+          "type": "article_block",
+          "settings": {
+            "card_type": "reverse",
+            "overlay_opacity": 30,
+            "show_image": true,
+            "show_tags": true,
+            "show_date": false,
+            "show_author": true,
+            "show_excerpt": false,
+            "image_ratio": "square",
+            "image_fit": "cover",
+            "heading_size": "h5",
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "article_block-1",
+        "article_block-2",
+        "article_block-3"
+      ],
+      "settings": {
+        "grid_type": "type1",
+        "per_row": 4,
+        "heading": "Journal",
+        "heading_tag": "h2",
+        "description": "",
+        "button_label": "Read Journal",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "padding_top": "xs",
+        "padding_bottom": "xs",
+        "margin_top": "no-indent",
+        "margin_bottom": "xs",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "image_with_text_JKWBWG": {
+      "type": "image-with-text",
+      "disabled": true,
+      "settings": {
+        "section_heading": "New Release",
+        "section_heading_tag": "h2",
+        "image_size": "medium",
+        "heading": "Shine with Seasonal Picks",
+        "heading_tag": "h2",
+        "text": "<p>Explore our curated collection of shimmering elegance, designed to make you shine.</p>",
+        "subheading": "New collection",
+        "subheading_second": "rafted Luxury",
+        "button_label": "Explore Collection",
+        "button_style": "primary",
+        "button_arrow": false,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "ABOUT"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Curating Timeless Elegance Through Jewelry as Art",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each jewel is a wearable work of art, meticulously designed to embody timeless elegance and unmatched sparkle.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Read About Us",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "text",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "container_size": "small",
+        "margin_top": "no-indent",
+        "margin_bottom": "s",
+        "padding_top": "xs",
+        "padding_bottom": "l",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "newsletter_aaeic9": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "",
+        "heading": "Sign Up to Our Newsletter & Get Special Offers",
+        "heading_tag": "h2",
+        "text": "",
+        "newsletter_text": "",
+        "margin_top": "s",
+        "margin_bottom": "s",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": {
+            "heading": "Artisan Craftsmanship",
+            "heading_size": "h5",
+            "heading_tag": "h3",
+            "text": "<p>Every element is meticulously handcrafted with utmost attention to detail.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "tertiary"
+          }
+        },
+        "column-2": {
+          "type": "column",
+          "settings": {
+            "heading": "Precious Metals",
+            "heading_size": "h5",
+            "heading_tag": "h3",
+            "text": "<p>Our exquisite collection showcases the finest gold, silver, and platinum artistry.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "tertiary"
+          }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": {
+            "heading": "Express Shipping",
+            "heading_size": "h5",
+            "heading_tag": "h3",
+            "text": "<p>Enjoy fast, reliable delivery straight to your doorstep, ensuring convenience and satisfaction.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "tertiary"
+          }
+        },
+        "column-4": {
+          "type": "column",
+          "settings": {
+            "heading": "Timeless Designs",
+            "heading_size": "h5",
+            "heading_tag": "h3",
+            "text": "<p>Discover jewelry blending classic elegance with modern trends, exuding timeless style.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "tertiary"
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3",
+        "column-4"
+      ],
+      "settings": {
+        "multicolumn_to_show": 4,
+        "heading": "",
+        "heading_tag": "h2",
+        "description": "",
+        "object_fit": "cover",
+        "img_size": "small",
+        "swipe_on_mobile": true,
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    },
+    "collapsible-content": {
+      "type": "collapsible-content",
+      "blocks": {
+        "text-block-1": {
+          "type": "text-block",
+          "settings": {
+            "default_open": true,
+            "block_heading": "Do you offer custom jewelry design services?",
+            "block_heading_tag": "h2",
+            "text": "<p>Yes, we specialize in custom design services, allowing customers to collaborate with our designers to create truly unique and personalized jewelry pieces tailored to individual tastes and stories.</p>"
+          }
+        },
+        "text-block-2": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "Can I return or exchange an item I've purchased?",
+            "block_heading_tag": "h2",
+            "text": "<p>Absolutely, we accept returns or exchanges within 30 days of purchase, provided the items are in their original condition and accompanied by a valid receipt, ensuring a hassle-free process for our customers.</p>"
+          }
+        },
+        "text-block-3": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "Do you have a warranty on your jewelry?",
+            "block_heading_tag": "h2",
+            "text": "<p>Indeed, every piece of our jewelry is backed by a one-year warranty, covering any manufacturing defects. This warranty reflects our commitment to quality and the enduring value of our products.</p>"
+          }
+        },
+        "text-block-4": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "Do you offer jewelry repair services?",
+            "block_heading_tag": "h2",
+            "text": "<p>Yes, our comprehensive repair services cater to all types of jewelry. Whether it's a simple cleaning or a complex repair, our skilled craftsmen ensure your cherished pieces are maintained and restored to their original beauty.</p>"
+          }
+        },
+        "text-block-5": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "Can I order online and pick up in-store?",
+            "block_heading_tag": "h2",
+            "text": "<p>Yes, customers have the option to order products online and select in-store pickup at checkout. This service allows combining the ease of online shopping with the personal touch of in-store service.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text-block-1",
+        "text-block-2",
+        "text-block-3",
+        "text-block-4",
+        "text-block-5"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "heading": "FAQs",
+        "heading_tag": "h2",
+        "margin_top": "xs",
+        "margin_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "collection-grid",
+    "popular-products",
+    "image-banner",
+    "popular-products-2",
+    "product-markers",
+    "grid-banner",
+    "testimonials",
+    "blog-post",
+    "image_with_text_JKWBWG",
+    "rich-text",
+    "newsletter_aaeic9",
+    "multicolumn",
+    "collapsible-content"
+  ]
+}

@@ -1,0 +1,32 @@
+{% liquid
+  if custom_settings
+    assign section_heading = section_heading
+    assign section_description = section_description
+  else
+    assign section_heading = section.settings.heading
+    assign section_description = section.settings.description
+  endif
+
+  assign section_heading_tag = 'h2'
+  if section.settings.heading_tag != blank
+    assign section_heading_tag = section.settings.heading_tag
+  endif
+%}
+{%- if section_heading != blank or section_description != blank -%}
+  <div class="section-header__line{% if section_heading == blank and section_description != blank %} section-header__line-sub{% endif %}">
+    <div class="container">
+      <div class="section-header__item">
+        {%- if section_heading != blank -%}
+          <{{ section_heading_tag }} class="section-header__title title--section h2">
+            {{ section_heading }}
+          </{{ section_heading_tag }}>
+        {% endif %}
+        {%- if section_description != blank -%}
+          <div class="section-header__desc richtext__content subtitle">
+            {{ section_description }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

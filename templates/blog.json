@@ -1,0 +1,146 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "{{ blog.title }}",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "xs",
+        "padding_bottom": "xs",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "tabs": {
+      "type": "tabs",
+      "blocks": {
+        "tab-1": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "heading": "",
+            "description": "",
+            "button_label": "Read More",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "tab-2": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "heading": "The Ultimate Guide to Wooden Furniture Maintenance",
+            "description": "Learn the best methods for cleaning, maintaining the longevity of your wood furnishings, so they remain inviting.",
+            "button_label": "Read More",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "tab-3": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "heading": "Behind the Scenes How Our Furniture is Crafted",
+            "description": "Discover the artistry of our furniture-making process, from material selection to the final quality finishes our craftsmen apply.",
+            "button_label": "Read More",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "tab-4": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "heading": "The Ultimate Guide to Wooden Furniture Maintenance",
+            "description": "We offer authoritative insights on maintenance routines, resolving wear and tear, and preserving the natural charm and resilience of your wood furniture for generations to come.",
+            "button_label": "Read More",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "tab-1",
+        "tab-2",
+        "tab-3",
+        "tab-4"
+      ],
+      "settings": {
+        "is_autoplay": true,
+        "autoplay_speed": 3,
+        "heading": "Featured Posts",
+        "subheading": "Creativity",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "blocks": {
+        "exception_fxPfhT": {
+          "type": "exception",
+          "settings": {}
+        },
+        "exception_3CQTBB": {
+          "type": "exception",
+          "settings": {}
+        },
+        "exception_ygcqN6": {
+          "type": "exception",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "exception_fxPfhT",
+        "exception_3CQTBB",
+        "exception_ygcqN6"
+      ],
+      "settings": {
+        "image_ratio": "landscape",
+        "image_fit": "cover",
+        "card_type": "default",
+        "heading_size": "h5",
+        "show_image": true,
+        "show_tags": true,
+        "show_date": true,
+        "show_excerpt": false,
+        "show_author": true,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    }
+  },
+  "order": [
+    "rich-text",
+    "tabs",
+    "main"
+  ]
+}

@@ -1,0 +1,615 @@
+{{ 'section-tabs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tabs.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  {% render 'section-padding' %}
+  {% render 'section-margin' %}
+{%- endstyle -%}
+
+<div
+  class="tabs tabs-section section-{{ section.id }}-padding {% if section.settings.enable_border_top %} section_border_top{% endif %}{% if section.settings.enable_border_bottom %} section_border_bottom{% endif %}"
+  data-autoplay="{{ section.settings.is_autoplay }}"
+  data-autoplay-speed="{{ section.settings.autoplay_speed | times: 1000 | round: 0 }}"
+>
+  <div class="container">
+    <div class="tabs_wrapper">
+      {% if section.settings.heading != blank %}
+        <div class="tabs_heading-wrapper">
+          <{{ section.settings.heading_tag }} class="tabs_heading h2">
+            {{ section.settings.heading }}
+          </{{ section.settings.heading_tag }}>
+        </div>
+      {% endif %}
+      <div class="tabs_left-wrapper">
+        {% if section.settings.subheading != blank %}
+          <div class="tabs__subheading subtitle">
+            {{ section.settings.subheading | escape }}
+          </div>
+        {% endif %}
+        {%- for block in section.blocks -%}
+          {% liquid
+            assign collection = block.settings.collection
+            assign article = block.settings.article
+          %}
+          <div
+            class="tab__item-wrapper{% if forloop.index == 1 %} active{% endif %}"
+            data-tab-content="{{ section.id }}-tab-{{ forloop.index }}"
+          >
+            {% comment %}
+              {% liquid
+              	if block.settings.heading != blank
+              		assign heading = block.settings.heading
+              	elsif collection != blank
+              		assign heading = collection.title
+              	elsif article != blank
+              		assign heading = article.title
+              	endif
+
+              	if block.settings.description != blank
+              		assign description = block.settings.description
+              	elsif collection != blank
+              		assign description = collection.description
+              	elsif article != blank
+              		assign description = article.excerpt_or_content | strip_html | truncate: 70
+              	endif
+              %}
+            {% endcomment %}
+            <div class="tab__item-info-block">
+              <{{ block.settings.heading_tag }} class="tab__item-info-title h3">
+                {% if block.settings.heading != blank %}
+                  {{ block.settings.heading }}
+                {% endif %}
+                {% if collection != blank and block.settings.heading == blank %}
+                  {{ collection.title }}
+                {% endif %}
+                {% if article != blank and block.settings.heading == blank and collection == blank %}
+                  {{ article.title }}
+                {% endif %}
+              </{{ block.settings.heading_tag }}>
+              <div class="tab__item-info-desc">
+                {% if block.settings.description != blank %}
+                  {{ block.settings.description }}
+                {% endif %}
+                {% if collection != blank and block.settings.description == blank %}
+                  {{ collection.description }}
+                {% endif %}
+                {% if article != blank and block.settings.description == blank and collection == blank %}
+                  {{ article.excerpt_or_content | strip_html | truncate: 70 }}
+                {% endif %}
+              </div>
+              {% render 'button', layout: block %}
+            </div>
+            {% comment %}
+              {% if collection != blank %}
+              	<div class="tab__item-info-block">
+              		<h3 class="tab__item-info-title">
+              			{{ collection.title | escape }}
+              		</h3>
+              		<div class="tab__item-info-desc">
+              			{{ collection.description }}
+              		</div>
+              		{% render 'button', layout: block %}
+              	</div>
+              {% elsif article != blank %}
+              	<div class="tab__item-info-block">
+              		<h3 class="tab__item-info-title">
+              			{{ article.title | escape }}
+              		</h3>
+              		<div class="tab__item-info-desc">
+              			{{ article.excerpt_or_content | strip_html | truncate: 70 }}
+              		</div>
+              		{% render 'button', layout: block %}
+              	</div>
+              {% endif %}
+              {% if collection == blank and article == blank %}
+              	<div class="tab__item-info-block">
+              		<h3 class="tab__item-info-title">
+              			{{ 'sections.tabs.heading' | t }}
+              		</h3>
+              		<div class="tab__item-info-desc">
+              			{{ 'sections.tabs.description' | t }}
+              		</div>
+              		{% render 'button', layout: block %}
+              	</div>
+              {% endif %}
+            {% endcomment %}
+          </div>
+        {%- endfor -%}
+        {% if section.blocks.size > 1 %}
+          <ul
+            class="tabs-list progress-bar"
+            style="--progress-index: 1; --items-count: {{ section.blocks | size }}"
+          >
+            {%- for block in section.blocks -%}
+              {% liquid
+                assign collection = block.settings.collection
+                assign article = block.settings.article
+              %}
+              <li
+                data-tab-target="{{ section.id }}-tab-{{ forloop.index }}"
+                class="tab__item{% if forloop.index == 1 %} active{% endif %}"
+              >
+                {% if block.settings.image != blank or collection != blank or article != blank %}
+                  {% if block.settings.image != blank %}
+                    {% assign image_height = block.settings.image.width
+                      | divided_by: block.settings.image.aspect_ratio
+                    %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                        height: image_height
+                    }}
+                  {% endif %}
+                  {% if collection != blank and block.settings.image == blank %}
+                    {% liquid
+                      if collection.image != blank
+                        assign collection_img = collection.image
+                      elsif collection.featured_image != blank
+                        assign collection_img = collection.featured_image
+                      endif
+                      assign image_height = collection_img.width | divided_by: collection_img.aspect_ratio
+                    %}
+                    {{
+                      collection_img
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                        height: image_height
+                    }}
+                  {% endif %}
+                  {% if article != blank and block.settings.image == blank and collection == blank %}
+                    {% assign image_height = article.width | divided_by: article.aspect_ratio %}
+                    {{
+                      article
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                        height: image_height
+                    }}
+                  {% endif %}
+                {% else %}
+                  {% assign placeholder_index = forloop.index | modulo: 6 | plus: 1 %}
+                  {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                {% endif %}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="tabs_right-wrapper">
+        <div class="tabs_right-box">
+          {%- for block in section.blocks -%}
+            {% liquid
+              assign collection = block.settings.collection
+              assign article = block.settings.article
+            %}
+            <div
+              class="tab__item-wrapper tab__item-img{% if forloop.index == 1 %} active{% endif %}"
+              data-tab-content="{{ section.id }}-tab-{{ forloop.index }}"
+            >
+              <div class="tab__item-image-block">
+                {% if block.settings.image != blank or collection != blank or article != blank %}
+                  {% if block.settings.image != blank %}
+                    {% assign image_height = block.settings.image.width
+                      | divided_by: block.settings.image.aspect_ratio
+                    %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                        height: image_height
+                    }}
+                  {% endif %}
+                  {% if collection != blank and block.settings.image == blank %}
+                    {% liquid
+                      if collection.image != blank
+                        assign collection_img = collection.image
+                      elsif collection.featured_image != blank
+                        assign collection_img = collection.featured_image
+                      endif
+                      assign image_height = collection_img.width | divided_by: collection_img.aspect_ratio
+                    %}
+                    {{
+                      collection_img
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                        height: image_height
+                    }}
+                  {% endif %}
+                  {% if article != blank and block.settings.image == blank and collection == blank %}
+                    {% assign image_height = article.width | divided_by: article.aspect_ratio %}
+                    {{
+                      article
+                      | image_url: width: 3840
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '100vw',
+                        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                        height: image_height
+                    }}
+                  {% endif %}
+                {% else %}
+                  {% assign placeholder_index = forloop.index | modulo: 6 | plus: 1 %}
+                  {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                {% endif %}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.tabs.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "is_autoplay",
+      "default": true,
+      "label": "t:sections.all.slider_options.slider_is_autoplay.label"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 0.5,
+      "max": 8,
+      "step": 0.1,
+      "default": 3,
+      "unit": "s",
+      "label": "t:sections.all.slider_options.delay.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "t:sections.tabs.settings.heading.default",
+      "label": "t:sections.all.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.all.heading_tag.options__8.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info",
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "t:sections.all.subheading.label",
+      "default": "t:sections.tabs.settings.subheading.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "l",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-padding.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_top.label"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.border.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_top",
+      "default": true,
+      "label": "t:sections.all.border.border_enable_top.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_bottom",
+      "default": true,
+      "label": "t:sections.all.border.border_enable_bottom.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "t:sections.tabs.blocks.name",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.all.collection.label"
+        },
+        {
+          "type": "article",
+          "id": "article",
+          "label": "t:sections.all.article_card.header.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.all.image.label",
+          "info": "t:sections.tabs.blocks.settings.image.info"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "t:sections.tabs.blocks.settings.heading.default",
+          "label": "t:sections.all.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_tag.options__1.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_tag.options__2.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.all.heading_tag.options__3.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.heading_tag.options__4.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:sections.all.heading_tag.options__5.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:sections.all.heading_tag.options__6.label"
+            },
+            {
+              "value": "div",
+              "label": "t:sections.all.heading_tag.options__7.label"
+            },
+            {
+              "value": "p",
+              "label": "t:sections.all.heading_tag.options__8.label"
+            }
+          ],
+          "default": "h3",
+          "label": "t:sections.all.heading_tag.label",
+          "info": "t:sections.all.heading_tag.info",
+          "visible_if": "{{ block.settings.heading != blank }}"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "default": "t:sections.tabs.blocks.settings.subheading.default",
+          "label": "t:sections.all.description.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.all.button.header.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "t:sections.tabs.blocks.settings.button_label.default",
+          "label": "t:sections.all.button.label.label",
+          "info": "t:sections.all.button.label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.all.button.link.label"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.all.button.style.options__1.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.all.button.style.options__2.label"
+            },
+            {
+              "value": "tertiary",
+              "label": "t:sections.all.button.style.options__3.label"
+            }
+          ],
+          "default": "primary",
+          "label": "t:sections.all.button.style.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_arrow",
+          "default": false,
+          "label": "t:sections.all.button.arrow.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.tabs.name",
+      "blocks": [
+        {
+          "type": "tab"
+        },
+        {
+          "type": "tab"
+        },
+        {
+          "type": "tab"
+        },
+        {
+          "type": "tab"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

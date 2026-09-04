@@ -1,0 +1,310 @@
+{% doc %}
+  Renders the Sticky Add to Cart bar for the product page.
+
+  The bar mirrors the main product form: it renders a compact variant picker,
+  price, quantity and Add to Cart button, and is kept in sync (both directions)
+  with the main form by the existing VariantSelects logic in global.js.
+
+  Contract with global.js (do not rename without updating global.js):
+  - Root element must carry the class `product-sticky-add-bar`.
+  - Variant picker id must be `variant-picker-{section}-sticky_add_to_cart_bar`
+    with `data-section="{section}"` so `getOtherPickerForSync()` can pair it with
+    the main picker and the form/price/button updates target the right nodes.
+  - Price wrapper id must be `price-sticky-{section}`.
+  - The buy form id must be `sticky-bar-product-form-{section}` and live inside a
+    `<product-form>` element. It must contain `input[name="id"]` and `[name="add"]`.
+  - The quantity input id must be `Quantity-{section}-sticky_add_to_cart_bar`; its
+    rules are mirrored from the main quantity input by sticky-add-to-cart.js.
+
+  @param {object} product - Product Liquid object
+  @param {object} section - Section Liquid object
+
+  @example
+  {% render 'product-sticky-add-to-cart', product: product, section: section %}
+{% enddoc %}
+
+{%- liquid
+  if product == blank
+    break
+  endif
+
+  assign section_id = section.id
+  assign sticky_section_id = section_id | append: '-sticky_add_to_cart_bar'
+  assign sticky_form_id = 'sticky-bar-product-form-' | append: section_id
+  assign current_variant = product.selected_or_first_available_variant
+
+  assign is_high_variant_product = false
+  if product.variants_count > 250
+    assign is_high_variant_product = true
+  endif
+
+  assign computed_variant_media_display = section.settings.variant_media_display | default: 'show_all'
+  if section.settings.show_primary_media_on_page_load == true
+    assign computed_variant_media_display = 'show_all'
+  endif
+
+  assign sticky_image = current_variant.featured_media | default: product.featured_media
+  assign sticky_image_alt = product.title | escape
+-%}
+
+<div
+  class="product-sticky-add-bar no-js-hidden"
+  data-section-id="{{ section_id }}"
+  aria-hidden="true"
+>
+  <div class="page-width product-sticky-add-bar__inner">
+    <div class="product-sticky-add-bar__product">
+      {%- if sticky_image != blank -%}
+        <div class="product-sticky-add-bar__media">
+          {{
+            sticky_image
+            | image_url: width: 160
+            | image_tag:
+              loading: 'lazy',
+              width: 80,
+              height: 80,
+              widths: '80, 120, 160',
+              alt: sticky_image_alt,
+              class: 'product-sticky-add-bar__image'
+          }}
+        </div>
+      {%- endif -%}
+      <div class="product-sticky-add-bar__details">
+        <span class="product-sticky-add-bar__title">{{ product.title }}</span>
+        <div
+          id="price-sticky-{{ section_id }}"
+          class="product-sticky-add-bar__price no-js-hidden"
+        >
+          {%- render 'price', product: product, use_variant: true, show_badges: false -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="product-sticky-add-bar__controls">
+      {%- unless product.has_only_default_variant -%}
+        <variant-selects
+          id="variant-picker-{{ section_id }}-sticky_add_to_cart_bar"
+          class="product-sticky-add-bar__variants no-js-hidden"
+          data-section="{{ section_id }}"
+          data-url="{{ product.url }}"
+          data-is-high-variant-product="{{ is_high_variant_product }}"
+          data-update-url="false"
+          data-variant-media-display="{{ computed_variant_media_display }}"
+        >
+          {%- for option in product.options_with_values -%}
+            {%- liquid
+              assign is_color_option = false
+
+              for value in option.values
+                if settings.type_color_swatch == 'custom' and value.swatch.color != blank
+                  assign is_color_option = true
+                endif
+              endfor
+
+              assign color_trigger = settings.trigger_swatch | strip | newline_to_br | split: '<br />'
+              assign name_option = option.name | handle | strip
+              for item in color_trigger
+                assign item_temp = item | handle | strip
+                if settings.type_color_swatch == 'custom' and name_option == item_temp
+                  assign is_color_option = true
+                endif
+              endfor
+
+              if is_color_option
+                assign color_value = blank
+                for value in option.values
+                  if settings.type_color_swatch == 'custom' and option.selected_value == value
+                    if value.swatch.image != blank
+                      assign init_color_value = value.name | handle | strip
+                      assign color_image = value.swatch.image | image_url: width: 60
+                      assign color_value = 'url(' | append: color_image | append: ') no-repeat center/cover'
+                    elsif value.swatch.color != blank
+                      assign init_color_value = value.name | handle | strip
+                      assign color_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                    else
+                      assign init_color_value = value.name | handle | strip
+                      assign color_value = init_color_value | remove: '-'
+                    endif
+
+                    if settings.custom_colors != blank
+                      assign custom_colors_string = settings.custom_colors | strip
+                      assign custom_colors_obj = custom_colors_string | newline_to_br | split: '<br />'
+
+                      for obj in custom_colors_obj
+                        assign obj_strip = obj | strip
+                        assign obj_key = obj_strip | split: ':' | first
+                        assign obj_value = obj_strip | split: ':' | last
+                        assign obj_color_name = obj_key | handle | strip
+
+                        if init_color_value == obj_color_name
+                          assign obj_color_value = obj_value | strip
+                          if obj_color_value contains 'gradient'
+                            assign color_value = obj_color_value
+                          else
+                            assign color_value = obj_color_value | remove: '-'
+                          endif
+                          break
+                        endif
+                      endfor
+                    endif
+                  endif
+                endfor
+              endif
+
+              assign has_color_swatch = false
+              if is_color_option and color_value != blank
+                assign has_color_swatch = true
+              endif
+            -%}
+
+            <fieldset
+              class="product-form__controls product-form__controls--dropdown product-form__input product-form__input--dropdown"
+              id="SingleOptionSelector-{{ forloop.index0 }}-sticky_add_to_cart_bar"
+              data-option-position="{{ option.position }}"
+            >
+              <legend class="product-form__group-name visually-hidden">{{ option.name }}</legend>
+              <variant-dropdown-select
+                class="dropdown-select select"
+                form="{{ sticky_form_id }}"
+              >
+                <div
+                  class="dropdown-select__current select-label small-font{% if has_color_swatch %} dropdown-select__current--with-color{% endif %} focus-inset"
+                  role="button"
+                  tabindex="0"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  {% if has_color_swatch %}
+                    style="--swatch-color: {{ color_value }};"
+                  {% endif %}
+                >
+                  <span class="small-font" data-dropdown-current-value>
+                    {{- option.selected_value }}
+                  </span>
+
+                  {% render 'icon-arrow-small' %}
+                </div>
+
+                <div class="dropdown-select__options" role="listbox" tabindex="-1">
+                  <ul class="product-form__controls-group list-unstyled">
+                    {% render 'product-variant-options',
+                      product: product,
+                      option: option,
+                      section_obj: section,
+                      section_id: sticky_section_id,
+                      picker_type: 'dropdown',
+                      has_color_swatch: has_color_swatch
+                    %}
+                  </ul>
+                </div>
+
+                <input
+                  id="HiddenInput-{{ sticky_section_id }}-{{ option.name }}-{{ forloop.index0 }}"
+                  type="hidden"
+                  name="{{ option.name }}"
+                  value="{{ option.selected_value }}"
+                  {% if is_color_option %}
+                    data-color-swatch="{{ color_value }}"
+                  {% endif %}
+                >
+              </variant-dropdown-select>
+            </fieldset>
+          {%- endfor -%}
+
+          {% comment %} first 250 variants of product {% endcomment %}
+          <script type="application/json" data-all-variants-no-high>
+            {{ product.variants | json }}
+          </script>
+
+          {% comment %} selected variant of product {% endcomment %}
+          <script type="application/json" data-selected-variant>
+            {{ product.selected_or_first_available_variant | json }}
+          </script>
+        </variant-selects>
+      {%- endunless -%}
+
+      <product-form
+        class="product-form product-sticky-add-bar__form"
+        data-hide-errors="false"
+        data-source="{{ section_id }}"
+      >
+        <div class="product-form__error-message-wrapper" role="alert" hidden>
+          <span class="product-form__error-message"></span>
+        </div>
+        {%- form 'product',
+          product,
+          id: sticky_form_id,
+          class: 'form product-sticky-add-bar__form-inner',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ current_variant.id }}"
+            {% if current_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+
+          <div class="product-sticky-add-bar__quantity">
+            <quantity-input class="quantity">
+              <button
+                class="quantity__button no-js-hidden"
+                name="minus"
+                type="button"
+              >
+                <span class="visually-hidden">
+                  {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+                </span>
+                {% render 'icon-minus' %}
+              </button>
+              <input
+                class="quantity__input"
+                type="number"
+                name="quantity"
+                id="Quantity-{{ section_id }}-sticky_add_to_cart_bar"
+                data-min="{{ current_variant.quantity_rule.min }}"
+                min="{{ current_variant.quantity_rule.min }}"
+                {% if current_variant.quantity_rule.max != null %}
+                  max="{{ current_variant.quantity_rule.max }}"
+                {% endif %}
+                step="{{ current_variant.quantity_rule.increment }}"
+                value="{{ current_variant.quantity_rule.min }}"
+                form="{{ sticky_form_id }}"
+                aria-label="Quantity"
+              >
+              <button
+                class="quantity__button no-js-hidden"
+                name="plus"
+                type="button"
+              >
+                <span class="visually-hidden">
+                  {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+                </span>
+                {% render 'icon-plus' %}
+              </button>
+            </quantity-input>
+          </div>
+
+          <button
+            type="submit"
+            name="add"
+            class="product-form__submit product-sticky-add-bar__submit button button--primary"
+            {% if current_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+            <span>
+              {%- if current_variant.available == false -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- endif -%}
+            </span>
+            {%- render 'icon-loading' -%}
+          </button>
+        {%- endform -%}
+      </product-form>
+    </div>
+  </div>
+</div>

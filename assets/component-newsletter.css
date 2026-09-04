@@ -1,0 +1,115 @@
+.newsletter-form__inner {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+  flex-direction: column;
+}
+@media (min-width: 576px) {
+  .newsletter-form__inner {
+    flex-direction: row;
+  }
+}
+.newsletter-form__field-wrapper {
+  flex: 1;
+  width: 100%;
+  position: relative;
+}
+@media (min-width: 1100px) {
+  .newsletter-form__field-wrapper {
+    width: auto;
+  }
+}
+.newsletter-form__message {
+  margin-bottom: 0;
+}
+@media (min-width: 750px) {
+  .newsletter-form__message {
+    justify-content: flex-start;
+  }
+}
+.newsletter-form__message--success {
+  margin-top: 2rem;
+}
+@media (min-width: 750px) {
+  .newsletter-form__message--success {
+    width: 100%;
+  }
+}
+.newsletter-form__button {
+  margin-left: 1.4rem;
+}
+
+.newsletter {
+  padding: 4rem 0;
+}
+@media screen and (min-width: 990px) {
+  .newsletter {
+    padding: 6.4rem 0;
+  }
+}
+.newsletter__form {
+  max-width: 91.2rem;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.newsletter__title {
+  margin: 0 auto 2rem;
+  max-width: 72rem;
+}
+@media screen and (min-width: 990px) {
+  .newsletter__title {
+    margin: 0 auto 4rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .newsletter__title {
+    max-width: 42rem;
+  }
+}
+.newsletter .newsletter__information {
+  margin-bottom: 3.2rem;
+}
+.newsletter .newsletter__button {
+  height: 100%;
+}
+.newsletter__text {
+  margin: 2.4rem 0 0;
+}
+.newsletter__text p {
+  margin: 0;
+}
+.newsletter .newsletter_field {
+  position: relative;
+  width: 100%;
+  min-height: 5.5rem;
+  display: flex;
+}
+.newsletter .newsletter-form__field-wrapper .newsletter-form__field {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+.newsletter .newsletter-form__field-wrapper .newsletter-form__field + label {
+  left: 0;
+  font-size: 1.4rem;
+}
+.newsletter .newsletter-form__field-wrapper .newsletter-form__field:hover,
+.newsletter .newsletter-form__field-wrapper .newsletter-form__field:active,
+.newsletter .newsletter-form__field-wrapper .newsletter-form__field:focus {
+  background-color: transparent;
+  border: none;
+}
+.newsletter .newsletter-form__field-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(var(--color-foreground-secondary), 0.7);
+  transition: all var(--duration-short) linear;
+}
+.newsletter .newsletter-form__field-wrapper:hover, .newsletter .newsletter-form__field-wrapper:focus-within {
+  border-color: rgba(var(--color-foreground-secondary));
+}

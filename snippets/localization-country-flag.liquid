@@ -1,0 +1,12 @@
+{%- comment -%}
+  Optional params: `country` (country object), `show` (boolean).
+{%- endcomment -%}
+{%- if show and country != blank -%}
+  <span class="localization-country-flag" aria-hidden="true">
+    {{-
+      country
+      | image_url: width: 32
+      | image_tag: loading: 'lazy', class: 'localization-country-flag__img', alt: ''
+    -}}
+  </span>
+{%- endif -%}

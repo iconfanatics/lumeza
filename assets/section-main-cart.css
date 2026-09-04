@@ -1,0 +1,14 @@
+.main-cart__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+  margin-top: 2.4rem;
+}
+@media screen and (min-width: 1100px) {
+  .main-cart__wrapper {
+    flex-wrap: unset;
+  }
+}
+.main-cart__wrapper .main-cart__box {
+  flex: 1 1 auto;
+}

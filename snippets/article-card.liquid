@@ -1,0 +1,309 @@
+{% comment %}
+  	Renders an article card for a given blog with settings to either show the image or not.
+
+  	Accepts:
+  	- blog: {Object} Blog object
+  	- article: {Object} Article object
+  	- show_image: {String} The setting either show the article image or not. If it's not included it will show the image by default
+  	- show_date: {String} The setting either show the article date or not. If it's not included it will not show the image by default
+
+  	Usage:
+  {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image %}
+{% endcomment %}
+{% liquid
+  case image_ratio
+    when 'landscape'
+      assign image_size = '56.25%'
+    when 'square'
+      assign image_size = '100%'
+    when 'portrait'
+      assign image_size = '120%'
+    else
+      assign image_size = '100%'
+  endcase
+%}
+{% liquid
+  assign heading_tag = 'h3'
+  if card_heading_tag != blank
+    assign heading_tag = card_heading_tag
+  endif
+%}
+
+{% if forloop != blank %}
+  {% assign placeholder_index = forloop.index | modulo: 6 | plus: 1 %}
+{% else %}
+  {% assign placeholder_index = 1 %}
+{% endif %}
+
+<article
+  class="article-card article-card-{{ card_type }}{% if card_type == 'overlay' %} color-inverse{% endif %}"
+  aria-labelledby="Article-{{ article.id }}"
+  style="--image-size: {{ image_size }}"
+>
+  {% if card_type == 'overlay' %}
+    <div class="article-card__info-wrapper">
+      {%- if show_tags or show_date or show_author -%}
+        {% if article != blank %}
+          {% if article.tags != blank or article.published_at != blank or article.author != blank %}
+            <div class="article-card__block">
+              {%- if show_tags and article.tags != blank -%}
+                <div class="article-card__tags">
+                  {% for tag in article.tags %}
+                    <a
+                      class="subtitle"
+                      href="{{ blog.url }}/tagged/{{ tag | handle }}"
+                      title="{{ tag }}"
+                    >
+                      {{- tag -}}
+                    </a>
+                  {% endfor %}
+                </div>
+              {%- endif -%}
+              {%- if show_date and article.published_at != blank -%}
+                <div class="article-card__date small-font">
+                  {{- article.published_at | time_tag: '%B %d, %Y' -}}
+                </div>
+              {%- endif -%}
+              {%- if show_author and article.author != blank -%}
+                <div class="article-card__author small-font">
+                  <span>{{ 'general.blog.author' | t }}</span>
+                  <span>
+                    {{- article.author -}}
+                  </span>
+                </div>
+              {%- endif -%}
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="article-card__block">
+            {%- if show_tags -%}
+              <div class="article-card__tags">
+                <span class="subtitle">
+                  {{ 'blogs.article.tag_placeholder' | t }}
+                </span>
+              </div>
+            {%- endif -%}
+            {%- if show_date -%}
+              <div class="article-card__date small-font">
+                {{ 'blogs.article.date_placeholder' | t }}
+              </div>
+            {%- endif -%}
+            {%- if show_author -%}
+              <div class="article-card__author small-font">
+                <span>{{ 'general.blog.author' | t }}</span>
+                <span>
+                  {{ 'blogs.article.author' | t }}
+                </span>
+              </div>
+            {%- endif -%}
+          </div>
+        {% endif %}
+      {% endif %}
+      {% if article != blank %}
+        <div class="article-card__text richtext__content">
+          <{{ heading_tag }}
+            class="article-card__title {{ heading_size }}"
+            id="Article-{{ article.id }}"
+          >
+            <a href="{{ article.url }}" class="full-unstyled-link">
+              {% if article.title == blank %}
+                {{ 'blogs.article.title' | t }}
+              {% else %}
+                {{ article.title | escape }}
+              {% endif %}
+            </a>
+          </{{ heading_tag }}>
+          {%- if show_excerpt and article.excerpt_or_content.size > 0 -%}
+            <p class="article-card__excerpt">
+              {% if article.excerpt_or_content == blank %}
+                {{ 'blogs.article.description' | t }}
+              {% else %}
+                {{ article.excerpt_or_content | strip_html | truncate: 100 }}
+              {% endif %}
+            </p>
+          {%- endif -%}
+        </div>
+      {% else %}
+        <div class="article-card__text richtext__content">
+          <{{ heading_tag }}
+            class="article-card__title {{ heading_size }}"
+            id="Article-{{ article.id }}"
+          >
+            <span class="full-unstyled-link">
+              {{ 'blogs.article.title' | t }}
+            </span>
+          </{{ heading_tag }}>
+          {%- if show_excerpt -%}
+            <p class="article-card__excerpt">
+              {{ 'blogs.article.description' | t }}
+            </p>
+          {%- endif -%}
+        </div>
+      {% endif %}
+    </div>
+    {% assign article_image = article.image %}
+    {%- if show_image and article_image != blank or placeholder -%}
+      <a
+        {% if article_image != blank %}
+          href="{{ article.url }}"
+        {%- endif -%}
+        class="article-card__image{% if card_type == 'overlay' %} have-overlay{% endif %}"
+      >
+        {% if article_image == blank and placeholder %}
+          {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
+        {% else %}
+          {% liquid
+            assign image_height = article_image.width | divided_by: article_image.aspect_ratio
+            assign image_width = article_image.width
+          %}
+          {% capture fit_style %}
+						object-fit: {{ image_fit }};
+					{% endcapture %}
+          {{
+            article_image
+            | image_url: width: 1296
+            | image_tag:
+              loading: 'lazy',
+              width: image_width,
+              height: image_height,
+              sizes: '100vw, (min-width: 576px) 50vw, (min-width: 1100px) 33vw',
+              widths: '375, 550, 750, 1100, 1500',
+              style: fit_style
+          }}
+        {% endif %}
+      </a>
+    {%- endif -%}
+  {% else %}
+    {%- if show_tags or show_date or show_author -%}
+      {%- if article != blank -%}
+        {%- if article.tags != blank or article.published_at != blank or article.author != blank -%}
+          <div class="article-card__block">
+            {%- if show_tags and article.tags != blank- %}
+              <div class="article-card__tags">
+                {% for tag in article.tags %}
+                  <a
+                    class="subtitle"
+                    href="{{ blog.url }}/tagged/{{ tag | handle }}"
+                    title="{{ tag }}"
+                  >
+                    {{ tag }}
+                  </a>
+                {% endfor %}
+              </div>
+            {%- endif -%}
+            {% if show_date and article.published_at != blank %}
+              <div class="article-card__date small-font">
+                {{- article.published_at | time_tag: '%B %d, %Y' -}}
+              </div>
+            {% endif %}
+            {%- if show_author and article.author != blank -%}
+              <div class="article-card__author small-font">
+                <span>{{ 'general.blog.author' | t }}</span>
+                <span>
+                  {{- article.author -}}
+                </span>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="article-card__block">
+          {%- if show_tags -%}
+            <div class="article-card__tags">
+              <span class="subtitle">
+                {{ 'blogs.article.tag_placeholder' | t }}
+              </span>
+            </div>
+          {%- endif -%}
+          {%- if show_date -%}
+            <div class="article-card__date small-font">
+              {{ 'blogs.article.date_placeholder' | t }}
+            </div>
+          {%- endif -%}
+          {%- if show_author -%}
+            <div class="article-card__author small-font">
+              <span>{{ 'general.blog.author' | t }}</span>
+              <span>
+                {{ 'blogs.article.author' | t }}
+              </span>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {% assign article_image = article.image %}
+    {%- if show_image and article_image != blank or placeholder -%}
+      <a
+        {% if article_image != blank %}
+          href="{{ article.url }}"
+        {%- endif -%}
+        class="article-card__image"
+      >
+        {% if article_image == blank and placeholder %}
+          {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
+        {% else %}
+          {% liquid
+            assign image_height = article_image.width | divided_by: article_image.aspect_ratio
+            assign image_width = article_image.width
+          %}
+          {% capture fit_style %}
+						object-fit: {{ image_fit }};
+					{% endcapture %}
+          {{
+            article_image
+            | image_url: width: 1296
+            | image_tag:
+              loading: 'lazy',
+              width: image_width,
+              height: image_height,
+              sizes: '100vw, (min-width: 576px) 50vw, (min-width: 1100px) 33vw',
+              widths: '375, 550, 750, 1100, 1500',
+              style: fit_style
+          }}
+        {% endif %}
+      </a>
+    {%- endif -%}
+    {%- if article != blank -%}
+      <div class="article-card__text richtext__content">
+        <{{ heading_tag }}
+          class="article-card__title {{ heading_size }}"
+          id="Article-{{ article.id }}"
+        >
+          <a href="{{ article.url }}" class="full-unstyled-link">
+            {% if article.title == blank %}
+              {{ 'blogs.article.title' | t }}
+            {% else %}
+              {{ article.title | escape }}
+            {% endif %}
+          </a>
+        </{{ heading_tag }}>
+        {%- if show_excerpt and article.excerpt_or_content.size > 0 -%}
+          <p class="article-card__excerpt">
+            {% if article.excerpt_or_content == blank %}
+              {{ 'blogs.article.description' | t }}
+            {% else %}
+              {{ article.excerpt_or_content | strip_html | truncate: 100 }}
+            {% endif %}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="article-card__text richtext__content">
+        <{{ heading_tag }}
+          class="article-card__title {{ heading_size }}"
+          id="Article-{{ article.id }}"
+        >
+          <span class="full-unstyled-link">
+            {{ 'blogs.article.title' | t }}
+          </span>
+        </{{ heading_tag }}>
+        {%- if show_excerpt -%}
+          <p class="article-card__excerpt">
+            {{ 'blogs.article.description' | t }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {% endif %}
+</article>

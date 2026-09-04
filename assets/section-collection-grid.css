@@ -1,0 +1,122 @@
+.collection-grid {
+  overflow: hidden;
+  --gap: 4.8rem;
+  --row-gap: 2.4rem;
+}
+.collection-grid__wrapper {
+  display: grid;
+  gap: var(--gap);
+  row-gap: 0;
+  grid-template-columns: 1fr;
+  flex: 1 1 auto;
+}
+@media screen and (min-width: 576px) {
+  .collection-grid__wrapper {
+    grid-template-columns: repeat(clamp(1, var(--per-row), 2), 1fr);
+  }
+}
+@media screen and (min-width: 990px) {
+  .collection-grid__wrapper {
+    grid-template-columns: repeat(clamp(1, var(--per-row), 3), 1fr);
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-grid__wrapper {
+    grid-template-columns: repeat(var(--per-row), 1fr);
+  }
+}
+.collection-grid .border-item .collection-grid__cards {
+  padding: 2.4rem 0;
+}
+@media screen and (min-width: 576px) {
+  .collection-grid .border-item .collection-grid__cards {
+    position: relative;
+  }
+  .collection-grid .border-item .collection-grid__cards::before {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: rgb(var(--color-border));
+    right: calc(var(--gap) / -2);
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-grid .border-item:not(.hide_border) .collection-grid__cards::before {
+    content: "";
+  }
+}
+.collection-grid .border-item {
+  position: relative;
+}
+.collection-grid .border-item:after {
+  position: absolute;
+  background: rgb(var(--color-border));
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  height: 0.1rem;
+}
+.collection-grid .collection-grid__wrapper.wrapper-per-row__1 .border-item:nth-child(n+1):not(:first-child):after {
+  content: "";
+}
+@media screen and (max-width: 575px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__2 .border-item:nth-child(n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 576px) and (max-width: 1099px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__2 .border-item:not(:nth-child(2n)) .collection-grid__cards::before, .collection-grid .collection-grid__wrapper.wrapper-per-row__2 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__2 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (max-width: 575px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__3 .border-item:nth-child(n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 576px) and (max-width: 989px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__3 .border-item:not(:nth-child(2n)) .collection-grid__cards::before, .collection-grid .collection-grid__wrapper.wrapper-per-row__3 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 990px) and (max-width: 1099px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__3 .border-item:not(:nth-child(3n)) .collection-grid__cards::before, .collection-grid .collection-grid__wrapper.wrapper-per-row__3 .border-item:nth-child(3n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__3 .border-item:nth-child(3n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (max-width: 575px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__4 .border-item:nth-child(n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 576px) and (max-width: 989px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__4 .border-item:not(:nth-child(2n)) .collection-grid__cards::before, .collection-grid .collection-grid__wrapper.wrapper-per-row__4 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 990px) and (max-width: 1099px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__4 .border-item:not(:nth-child(3n)) .collection-grid__cards::before, .collection-grid .collection-grid__wrapper.wrapper-per-row__4 .border-item:nth-child(3n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-grid .collection-grid__wrapper.wrapper-per-row__4 .border-item:nth-child(4n+1):not(:first-child):after {
+    content: "";
+  }
+}
+.collection-grid svg {
+  height: auto;
+}

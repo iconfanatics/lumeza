@@ -1,0 +1,99 @@
+#Details-CartDiscountCode {
+  margin-bottom: 1.6rem;
+}
+
+.totals__subtotal-value {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.totals__subtotal-value .totals__old-price {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.cart-discount-code {
+  display: block;
+}
+
+.cart-discount-code__form {
+  display: block;
+}
+
+.cart-discount-code__label {
+  display: block;
+  color: rgb(var(--color-foreground));
+  margin: 0 0 1.2rem;
+}
+
+.cart-discount-code__field {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.4rem;
+}
+
+.cart-discount-code__submit {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.cart-discount-code__submit .spinner {
+  width: 2rem;
+  height: 2rem;
+}
+
+.cart-discount-code__codes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.8rem;
+}
+.cart-discount-code__codes:empty {
+  display: none;
+}
+
+.cart-discount-code__pill {
+  display: flex;
+}
+
+.cart-discount-code__pill-button {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 0.4rem 0.8rem;
+  margin: 0.8rem 0 0;
+  border-radius: var(--border-radius-button);
+  border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  transition: border-color var(--duration-default) ease-in-out;
+}
+@media (hover: hover) {
+  .cart-discount-code__pill-button:hover {
+    border-color: rgb(var(--color-foreground));
+  }
+}
+
+.cart-discount-code__pill .icon-reset {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: rgb(var(--color-foreground));
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.cart-discount-code__error:not(.hidden) {
+  display: block;
+  margin: 0.4rem 0 0;
+}
+
+.cart-discount-code__error-text::before {
+  content: "*";
+  color: rgb(var(--color-error));
+  margin-inline-end: 0.4rem;
+}
+.cart-discount-code__error-text.hidden {
+  display: none;
+}

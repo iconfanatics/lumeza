@@ -1,0 +1,28 @@
+.list-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.list-social .list-social__item a {
+  padding: 0.2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .list-social {
+    justify-content: flex-start;
+  }
+}
+.list-social__item .icon {
+  height: 2rem;
+  width: 2rem;
+  transition: var(--duration-default);
+}
+
+.list-social__item:hover .icon {
+  opacity: 0.75;
+}
+
+.list-social__link {
+  align-items: center;
+  display: flex;
+}

@@ -1,0 +1,140 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:sections.footer.settings.footer-group.label",
+  "sections": {
+    "newsletter": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "text": "",
+        "newsletter_text": "",
+        "margin_top": "m",
+        "margin_bottom": "m",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_n7JyTB": {
+          "type": "column",
+          "settings": {
+            "heading": "Key Benefit",
+            "heading_size": "h4",
+            "button_label": "Learn More",
+            "button_style": "secondary"
+          }
+        },
+        "column_FjCUpR": {
+          "type": "column",
+          "settings": {
+            "heading": "Key Benefit",
+            "heading_size": "h4",
+            "button_label": "Shop All",
+            "button_style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "column_n7JyTB",
+        "column_FjCUpR"
+      ],
+      "settings": {
+        "multicolumn_to_show": 2,
+        "heading": "",
+        "description": "",
+        "object_fit": "cover",
+        "img_size": "small",
+        "swipe_on_mobile": true,
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    },
+    "ticker": {
+      "type": "ticker",
+      "settings": {
+        "color_scheme": "",
+        "ticker_speed": 5,
+        "ticker_font": 16,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer-0": {
+          "type": "logo_info",
+          "settings": {
+            "logo_width": 160
+          }
+        },
+        "footer-1": {
+          "type": "link_list",
+          "settings": {}
+        },
+        "footer-2": {
+          "type": "link_list",
+          "settings": {}
+        },
+        "footer-3": {
+          "type": "link_list",
+          "settings": {}
+        },
+        "link_list_PyJtcL": {
+          "type": "link_list",
+          "settings": {}
+        },
+        "footer-5": {
+          "type": "store_info",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "footer-0",
+        "footer-1",
+        "footer-2",
+        "footer-3",
+        "link_list_PyJtcL",
+        "footer-5"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "color_scheme_bottom": "",
+        "copyright_show": true,
+        "enable_language_selector": true,
+        "enable_country_selector": true,
+        "enable_follow_on_shop": false,
+        "payment_enable": true,
+        "margin_top": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    }
+  },
+  "order": [
+    "newsletter",
+    "multicolumn",
+    "ticker",
+    "footer"
+  ]
+}

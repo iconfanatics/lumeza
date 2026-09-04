@@ -1,0 +1,61 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "color_scheme": "background-2",
+        "overlay_opacity": 30,
+        "section_layout": "full",
+        "add_word": "Collection",
+        "show_word": false,
+        "show_collection_description": true,
+        "description_products": "Shop our full selection: something special for everyone and every occasion.",
+        "image_size": "small",
+        "show_image": false,
+        "subheading": "Luxury",
+        "subheading_second": "Essentials",
+        "margin_top": "xs",
+        "margin_bottom": "no-indent",
+        "padding_top": "m",
+        "padding_bottom": "xs"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 12,
+        "show_secondary_image": true,
+        "show_sku": false,
+        "show_vendor": false,
+        "show_collection_name": true,
+        "show_desc": false,
+        "show_color_swatch": true,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "enable_per_row_button": true,
+        "default_per_row": "large",
+        "image_filter_ratio": "4/5",
+        "image_filter_fit": "cover",
+        "image_filter_columns": 2,
+        "padding_top": "xs",
+        "padding_bottom": "no-indent"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid"
+  ]
+}

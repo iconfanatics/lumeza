@@ -1,0 +1,89 @@
+{{ 'component-collection-card.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  case media_size
+    when 'landscape'
+      assign section_size = '56.25%'
+    when 'portrait'
+      assign section_size = '125%'
+    when 'square'
+      assign section_size = '100%'
+    when 'custom'
+      assign ratio = section.settings.custom_height | times: 100.0 | divided_by: section.settings.custom_width
+      assign section_size = ratio | append: '%'
+    else
+      assign section_size = '100%'
+  endcase
+%}
+
+{% if forloop != blank %}
+  {% assign placeholder_index = forloop.index | modulo: 6 | plus: 1 %}
+{% else %}
+  {% assign placeholder_index = 1 %}
+{% endif %}
+
+<div
+  class="collection-card{% if show_collection_desc == true and card_type == 'overlay' %} collection-none-overley{% endif %} {% if show_collection_desc == true  %} collection-none-standart{% endif %} {% if card_type == 'overlay' %} color-inverse{% endif %}{% if card_type_text != "standart" %} collection-card-reverse {% endif %}"
+  style="--image-size: {{ section_size }};"
+>
+  <div class="collection-card__img-wrapper ">
+    <div class="collection-card__img-type color-inverse">
+      <a
+        class="collection-card__img have-overlay"
+        {% if block_collection != blank %}
+          href="{{ url }}"
+        {% endif %}
+      >
+        {% if block_image != blank or collection_image != blank or block_collection.featured_image %}
+          {% liquid
+            if block_image != blank
+              assign collection_img = block_image
+            elsif collection_image != blank
+              assign collection_img = collection_image
+            elsif block_collection.featured_image != blank
+              assign collection_img = block_collection.featured_image
+            endif
+            assign image_height = collection_img.width | divided_by: collection_img.aspect_ratio
+            assign image_width = collection_img.width
+            assign sizes = '(min-width: 750px) 50vw, 100vw'
+          %}
+          {{
+            collection_img
+            | image_url: width: 3840
+            | image_tag:
+              loading: 'lazy',
+              width: image_width,
+              height: image_height,
+              sizes: sizes,
+              widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+          }}
+        {%- else -%}
+          {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        {% endif %}
+      </a>
+      {% if show_collection_desc %}
+        <div class="collection-card__desc richtext__content medium-font">
+          {%- if collection_desc != blank -%}
+            {{ collection_desc }}
+          {% else %}
+            {{ 'collection.collection_desc' | t }}
+          {%- endif -%}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <h5 class="collection-card__title {% if text_center == "center" %} collection-card__title-position{% endif %}  {% if card_type == 'overlay' %} h5 {% endif %}">
+    <a
+      class="full-unstyled-link"
+      {% if block_collection != blank %}
+        href="{{ url }}"
+      {% endif %}
+    >
+      {% if block_collection != blank %}
+        {{ collection_title }}
+      {% else %}
+        {{- 'general.card.collection_name' | t -}}
+      {% endif %}
+    </a>
+  </h5>
+</div>

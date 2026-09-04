@@ -1,0 +1,79 @@
+{% comment %}
+  Renders native Shopify B2B quantity pricing elements for a product:
+  the volume price-break table and the quantity rules note.
+
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - section_id: {String} Section id used to scope the element id (required)
+
+  Usage:
+  {% render 'product-quantity-pricing-elements', product: product, section_id: section.id %}
+{% endcomment %}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+
+  assign has_volume_pricing = false
+  if product.quantity_price_breaks_configured? and variant.quantity_price_breaks.size > 0
+    assign has_volume_pricing = true
+  endif
+
+  assign has_price_rules = false
+  if variant.quantity_rule.increment > 1 or variant.quantity_rule.min > 1 or variant.quantity_rule.max != null
+    assign has_price_rules = true
+  endif
+-%}
+
+<div class="product-b2b-elements" id="ProductB2bElements-{{ section_id }}">
+  {%- if has_volume_pricing -%}
+    <div class="volume-pricing">
+      <span class="volume-pricing__title caption">{{ 'products.product.price.volume_pricing' | t }}</span>
+      <ul class="volume-pricing__list" role="list">
+        <li class="volume-pricing__item">
+          <span class="volume-pricing__quantity">{{ variant.quantity_rule.min }}+</span>
+          <span class="volume-pricing__price">
+            {%- if settings.currency_code_enabled -%}
+              {{ variant.price | money_with_currency }}
+            {%- else -%}
+              {{ variant.price | money }}
+            {%- endif %}
+            /{{ 'products.product.price.each' | t }}
+          </span>
+        </li>
+        {%- for price_break in variant.quantity_price_breaks -%}
+          <li class="volume-pricing__item">
+            <span class="volume-pricing__quantity">{{ price_break.minimum_quantity }}+</span>
+            <span class="volume-pricing__price">
+              {%- if settings.currency_code_enabled -%}
+                {{ price_break.price | money_with_currency }}
+              {%- else -%}
+                {{ price_break.price | money }}
+              {%- endif %}
+              /{{ 'products.product.price.each' | t }}
+            </span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+
+  {%- if has_price_rules -%}
+    <div class="quantity-rules caption">
+      {%- if variant.quantity_rule.increment > 1 -%}
+        <span class="quantity-rules__item">
+          {{- 'products.product.quantity.multiples_of' | t: quantity: variant.quantity_rule.increment -}}
+        </span>
+      {%- endif -%}
+      {%- if variant.quantity_rule.min > 1 -%}
+        <span class="quantity-rules__item">
+          {{- 'products.product.quantity.minimum_of' | t: quantity: variant.quantity_rule.min -}}
+        </span>
+      {%- endif -%}
+      {%- if variant.quantity_rule.max != null -%}
+        <span class="quantity-rules__item">
+          {{- 'products.product.quantity.maximum_of' | t: quantity: variant.quantity_rule.max -}}
+        </span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

@@ -1,0 +1,154 @@
+.image-with-text {
+  position: relative;
+}
+.image-with-text .container {
+  padding: 0;
+}
+.image-with-text .image-with-text__grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.image-with-text .image-with-text__button-wrapper {
+  margin-top: 2rem;
+}
+.image-with-text .image-with-text__media-item {
+  flex: 0 0 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__media-item {
+    flex-direction: unset;
+  }
+  .image-with-text .image-with-text__media-item::after {
+    content: "";
+    display: block;
+    padding-bottom: var(--image-height);
+  }
+}
+.image-with-text .image-with-text__media-item .section-header__title {
+  display: flex;
+  margin: 2rem 0;
+  padding: 0 2.4rem;
+  justify-content: center;
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__media-item .section-header__title {
+    justify-content: unset;
+    margin: 0;
+    padding: 2.4rem 4.3rem;
+  }
+}
+.image-with-text .image-with-text__media-item .section-header__title .section-header__text {
+  writing-mode: unset;
+  transform: unset;
+  text-align: center;
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__media-item .section-header__title .section-header__text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: unset;
+  }
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__media-item {
+    flex: 0 0 75%;
+    max-width: 75%;
+    max-height: unset;
+  }
+  .image-with-text .image-with-text__media-item .multicolumn-list__wrapper {
+    row-gap: unset;
+  }
+}
+.image-with-text .image-with-text__media-item .image-with-text__media {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  padding: 2.4rem;
+  position: relative;
+  border-top: 0.1rem solid rgba(var(--color-border));
+  border-bottom: 0.1rem solid rgba(var(--color-border));
+}
+@media screen and (min-width: 576px) {
+  .image-with-text .image-with-text__media-item .image-with-text__media {
+    min-height: 600px;
+  }
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__media-item .image-with-text__media {
+    min-height: unset;
+    border-bottom: unset;
+    border-top: unset;
+    border-right: 0.1rem solid rgba(var(--color-border));
+    border-left: 0.1rem solid rgba(var(--color-border));
+  }
+}
+.image-with-text .image-with-text__media-item .image-with-text__media .image-with-text__media-border {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.image-with-text .image-with-text__media-item .image-with-text__media img,
+.image-with-text .image-with-text__media-item .image-with-text__media svg,
+.image-with-text .image-with-text__media-item .image-with-text__media video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: var(--border-radius-media);
+  object-fit: cover;
+  object-position: center;
+}
+.image-with-text .image-with-text__content_item {
+  margin-bottom: 0.8rem;
+}
+@media only screen and (min-width: 990px) and (max-width: 1200px) {
+  .image-with-text .image-with-text__content_item .image-with-text__heading {
+    font-size: calc(var(--font-heading-h2-scale) * 2.2rem);
+  }
+}
+.image-with-text .image-with-text__text-item {
+  flex: 0 0 100%;
+  max-width: 100%;
+  z-index: 1;
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__text-item {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+.image-with-text .image-with-text__text-item .image-with-text__content,
+.image-with-text .image-with-text__text-item .multicolumn-list__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 2.4rem;
+  text-align: center;
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__text-item .image-with-text__content,
+.image-with-text .image-with-text__text-item .multicolumn-list__item {
+    text-align: left;
+  }
+}
+.image-with-text .image-with-text__text-item .image-with-text__content .image-with-text-item-btns,
+.image-with-text .image-with-text__text-item .multicolumn-list__item .image-with-text-item-btns {
+  gap: 1.2rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  flex-wrap: wrap;
+}
+@media screen and (min-width: 990px) {
+  .image-with-text .image-with-text__text-item .image-with-text__content .image-with-text-item-btns,
+.image-with-text .image-with-text__text-item .multicolumn-list__item .image-with-text-item-btns {
+    padding-top: 0;
+    margin-top: auto;
+    justify-content: unset;
+  }
+}

@@ -1,0 +1,41 @@
+<nav class="header__menu">
+  {%- if section.settings.menu != blank -%}
+    <ul class="list-menu list-menu--inline list-unstyled" role="list">
+      {%- for link in section.settings.menu.links -%}
+        {%- assign utility_item_handle = section.settings.utility_nav_item | handle -%}
+        {%- if utility_item_handle != blank and link.handle == utility_item_handle -%}
+          {%- continue -%}
+        {%- endif -%}
+        <li class="{% if link.links != blank %}list-menu-has-child{% endif %}{% if link.current and link.url != '/' %} current-link{% endif %}">
+          {% liquid
+            for block in section.blocks
+              assign menu_trigger = block.settings.menu_trigger | handle | strip
+              assign mega_submenu_trigger = block.settings.mega_submenu_trigger | handle | strip
+              if link.links != blank or block.type == 'mega_menu' and block.settings.additional_menu != blank and link.handle == menu_trigger
+                if link.handle == menu_trigger
+                  render 'header-mega-menu', links: link.links, block: block, link: link
+                  break
+                elsif link.handle == mega_submenu_trigger and block.type == 'mega_submenu'
+                  render 'header-mega-submenu', links: link.links, block: block, link: link
+                  break
+                elsif forloop.last
+                  render 'header-link', link: link, enable_top_link: enable_top_link
+                  render 'submenu', link: link, enable_top_link: enable_top_link
+                endif
+              elsif forloop.last
+                render 'header-link', link: link, enable_top_link: enable_top_link
+              endif
+            else
+              if link.links != blank
+                render 'header-link', link: link, enable_top_link: enable_top_link
+                render 'submenu', link: link, enable_top_link: enable_top_link
+              else
+                render 'header-link', link: link, enable_top_link: enable_top_link
+              endif
+            endfor
+          %}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</nav>

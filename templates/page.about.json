@@ -1,0 +1,366 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent"
+      }
+    },
+    "rich_text_T8PBFy": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_tWD3yq": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "About"
+          }
+        },
+        "heading_UqXHVY": {
+          "type": "heading",
+          "settings": {
+            "heading": "Championing Unwavering Passion for Design Excellence and Continuous",
+            "heading_size": "h1"
+          }
+        },
+        "text_kqW6fF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Dedicated to upholding an unyielding enthusiasm for exceptional design, we consistently strive for innovation and improvement. </p>"
+          }
+        }
+      },
+      "block_order": ["subheading_tWD3yq", "heading_UqXHVY", "text_kqW6fF"],
+      "settings": {
+        "color_scheme": "",
+        "container_size": "large",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "xs",
+        "padding_bottom": "l",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "tabs_RMmQFq": {
+      "type": "tabs",
+      "blocks": {
+        "tab_HNVgVT": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "article": "",
+            "heading": "Innovation at Its Core: The Intersection of Design and Technology",
+            "description": "We believe that innovation is the key to unlocking the beauty of functionality. Our furniture is designed to suit the rhythm of your life, adaptable and resilient.",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "tab_bxfGba": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "article": "",
+            "heading": "Craftsmanship in Every Detail: A Tribute to Artisanal Mastery",
+            "description": "Every stroke, every curve, and every stitch is a testament to the hands that made it.",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "tab_3rMmF8": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "article": "",
+            "heading": "Our Pledge to the Future: Preserving the Earth's Elegance",
+            "description": "We devoted to upholding a balance with nature by implementing sustainable practices that extend from our workshop to your home.",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        },
+        "tab_QhHMqx": {
+          "type": "tab",
+          "settings": {
+            "collection": "",
+            "article": "",
+            "heading": "Join Us on Our Journey: Building More Than Just Furniture",
+            "description": "We see our work as a collaborative art — a dialogue between our craft and your personal taste.",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_arrow": false
+          }
+        }
+      },
+      "block_order": ["tab_HNVgVT", "tab_bxfGba", "tab_3rMmF8", "tab_QhHMqx"],
+      "settings": {
+        "is_autoplay": true,
+        "autoplay_speed": 3,
+        "heading": "Our Mission",
+        "subheading": "Innovation",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": false
+      }
+    },
+    "our_team_aaEqyn": {
+      "type": "our-team",
+      "blocks": {
+        "categories_UTnbRg": {
+          "type": "categories",
+          "settings": {
+            "heading": "<em>Emily Johnson</em>",
+            "description": "<p>Reliable, proactive, and dedicated, strives for top-quality work, inspiring colleagues towards achievements.</p>"
+          }
+        },
+        "categories_XVznap": {
+          "type": "categories",
+          "settings": {
+            "heading": "<em>Olivia Brown</em>",
+            "description": "<p>Diligent, adaptable, and collaborative, consistently contributes valuable insights and solutions to team projects, fostering a culture of cooperation and success.</p>"
+          }
+        },
+        "categories_49WVKF": {
+          "type": "categories",
+          "settings": {
+            "heading": "<em>Michael Thompson</em>",
+            "description": "<p>Collaborative, empathetic, and diplomatic, navigating conflicts with tact and understanding to maintain a harmonious and productive work environment.</p>"
+          }
+        },
+        "categories_eBLBQM": {
+          "type": "categories",
+          "settings": {
+            "heading": "<em>Sophia Smith</em>",
+            "description": "<p>Analytical, organized, and goal-driven, approaches tasks with precision and efficiency, ensuring deadlines are met and objectives are achieved with meticulous attention to detail.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "categories_UTnbRg",
+        "categories_XVznap",
+        "categories_49WVKF",
+        "categories_eBLBQM"
+      ],
+      "settings": {
+        "columns": 4,
+        "heading": "Meet Our Team",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "image_ratio": "square",
+        "text_center": "left",
+        "card_type": "standart",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "s",
+        "padding_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonials_tab-1": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 4,
+            "text": "“I love the contemporary design of their furniture. It's so sleek and fits perfectly with the modern aesthetic of my home. Definitely a high-quality product.”",
+            "logo_width": 140,
+            "author_name": "Author name",
+            "author_position": "Author position"
+          }
+        },
+        "testimonials_tab-2": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"What stands out most is the value for money. The quality, coupled with the reasonable pricing, makes this brand a great choice for anyone looking to furnish their home.\"",
+            "logo_width": 140,
+            "author_name": "Author name",
+            "author_position": "Author position"
+          }
+        },
+        "testimonials_tab-3": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"Their customer service is top-notch! I had a few questions before making my purchase, and the team was so helpful and knowledgeable. It made my buying experience a breeze.\"",
+            "logo_width": 140,
+            "author_name": "Author name",
+            "author_position": "Author position"
+          }
+        },
+        "testimonials_tab-4": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"The delivery was prompt and the installation process was smooth. The team handled everything with great care and professionalism.\"",
+            "logo_width": 140,
+            "author_name": "Author name",
+            "author_position": "Author position"
+          }
+        },
+        "testimonials_tab_HVL8rn": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"I'm impressed by the durability of the furniture. It's been a few months and it still looks as good as new, even with daily use.\"",
+            "logo_width": 140,
+            "author_name": "Author name",
+            "author_position": "Author position"
+          }
+        },
+        "testimonials_tab_K8Di9g": {
+          "type": "testimonials_tab",
+          "settings": {
+            "enable_stars": true,
+            "rating": 5,
+            "text": "\"Each piece of furniture stands out for its exceptional craftsmanship and timeless design. The variety on offer meant I could find exactly what I needed to complement my home's decor.\"",
+            "logo_width": 140,
+            "author_name": "Author name",
+            "author_position": "Author position"
+          }
+        }
+      },
+      "block_order": [
+        "testimonials_tab-1",
+        "testimonials_tab-2",
+        "testimonials_tab-3",
+        "testimonials_tab-4",
+        "testimonials_tab_HVL8rn",
+        "testimonials_tab_K8Di9g"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "subheading": "TESTIMONIALS",
+        "margin_top": "xs",
+        "margin_bottom": "xs",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent"
+      }
+    },
+    "image-banner": {
+      "type": "image-banner",
+      "settings": {
+        "block_type": "overlay",
+        "animation_position": "center",
+        "color_scheme": "background-2",
+        "heading": "Transform Your Space with Quality Furniture Pieces",
+        "heading_size": "medium",
+        "description": "<p>Upgrade your space with our high-quality furniture pieces, designed to bring both style and comfort into your home.</p>",
+        "text_align": "left",
+        "button_label": "Shop All",
+        "button_style": "secondary",
+        "button_arrow": false,
+        "simple_button_label": "",
+        "simple_button_arrow": true,
+        "image_size": "small",
+        "overlay_opacity": 20,
+        "subheading": "New collection",
+        "subheading_second": "peaceful & tactile",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": false
+      }
+    },
+    "collapsible-content": {
+      "type": "collapsible-content",
+      "blocks": {
+        "text-block-1": {
+          "type": "text-block",
+          "settings": {
+            "default_open": true,
+            "block_heading": "Are your furniture pieces sustainable?",
+            "text": "<p>Yes, we meticulously select materials with eco-consciousness in mind, prioritizing options like responsibly sourced wood, recycled materials, and low-impact production processes. </p>"
+          }
+        },
+        "text-block-2": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "What is your return policy?",
+            "text": "<p>We offer a 30-day return policy. If you're not satisfied with your purchase, contact our customer support team, and we'll guide you through the return process.</p>"
+          }
+        },
+        "text-block-3": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "Do you offer customization options for furniture?",
+            "text": "<p>Yes, we offer customization on select furniture pieces. Please contact us to discuss your specific customization requirements.</p>"
+          }
+        },
+        "text-block-4": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "What are your delivery times and charges?",
+            "text": "<p>Delivery times and charges may vary depending on your location and the item's size. You can find detailed information on delivery options and costs during the checkout process.</p>"
+          }
+        },
+        "text-block-5": {
+          "type": "text-block",
+          "settings": {
+            "default_open": false,
+            "block_heading": "Are there any discounts or promotions available on your furniture?",
+            "text": "<p>Yes, we frequently offer discounts and promotions on select furniture items. You can check our website or contact our customer support for current offers and deals.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text-block-1",
+        "text-block-2",
+        "text-block-3",
+        "text-block-4",
+        "text-block-5"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "FAQs",
+        "margin_top": "xs",
+        "margin_bottom": "xs",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_T8PBFy",
+    "tabs_RMmQFq",
+    "our_team_aaEqyn",
+    "testimonials",
+    "image-banner",
+    "collapsible-content"
+  ]
+}

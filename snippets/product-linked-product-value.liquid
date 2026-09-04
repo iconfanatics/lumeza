@@ -1,0 +1,84 @@
+{% doc %}
+  Renders a linked product value. Use in conjunction with `product-linked-products` snippet.
+
+  @param {object} linked_product - Product Liquid object
+  @param {boolean} [is_active_product] - Indicates if the linked product is the active product
+
+  @example
+  {% render 'product-linked-product-value', linked_product: product %}
+{% enddoc %}
+
+{% liquid
+  # Linked product values
+  assign linked_product_color = linked_product.metafields.custom.linked_product_color.value
+  # Linked product color metafield takes priority over Linked product option
+  assign linked_product_option = linked_product.metafields.custom.linked_product_option.value
+
+  # Fallback value
+  if linked_product_color == blank and linked_product_option == blank and linked_product.featured_media == blank
+    assign linked_product_color = '#000000'
+  endif
+%}
+
+{%- if linked_product != blank -%}
+  <input
+    type="radio"
+    id="linked-product-{{ linked_product.id }}"
+    name="linked-product"
+    {% if is_active_product %}
+      checked
+    {% endif %}
+    {% unless is_active_product %}
+      data-linked-product-url="{{ linked_product.url }}"
+    {% endunless %}
+  >
+
+  {%- if linked_product_color != blank -%}
+    {%- liquid
+      assign color_val = linked_product_color | remove: '-'
+      assign color_lower = linked_product_color | downcase | strip
+      if color_lower == 'white' or color_lower == '#fff' or color_lower == '#ffffff'
+        assign swatch_bg = 'rgb(var(--color-border))'
+        assign swatch_border = 'transparent'
+        assign disable_color = 'rgb(var(--color-foreground-title))'
+        assign checkbox_bg = 'rgb(var(--color-border))'
+      else
+        assign swatch_bg = 'transparent'
+        assign swatch_border = 'rgba(var(--color-border),0.5)'
+        assign disable_color = 'white'
+        assign checkbox_bg = 'white'
+      endif
+    -%}
+    <label
+      for="linked-product-{{ linked_product.id }}"
+      class="color-swatch"
+      title="{{ linked_product.title }}"
+      style="--swatch-color: {{ color_val }}; --swatch-bg: {{ swatch_bg }}; --swatch-border: {{ swatch_border }}; --disable-color: {{ disable_color }}; --checkbox-bg: {{ checkbox_bg }}; --swatch-border-radius: {{ settings.swatch_border_radius }}%"
+    >
+      <span class="visually-hidden">{{ linked_product.title }}</span>
+    </label>
+
+  {%- elsif linked_product.featured_media != blank -%}
+    {%- liquid
+      assign swatch_image_width = 80
+      assign image_url = linked_product.featured_image | image_url: width: swatch_image_width
+    -%}
+    <label
+      for="linked-product-{{ linked_product.id }}"
+      class="color-swatch variant-swatch variant-swatch--square"
+      title="{{ linked_product.title }}"
+      style="--swatch-color: url({{ image_url }}); --swatch-border-radius: {{ settings.swatch_border_radius }}%"
+    >
+      <span class="visually-hidden">{{ linked_product.title }}</span>
+    </label>
+
+  {%- elsif linked_product_option != blank -%}
+    <label
+      for="linked-product-{{ linked_product.id }}"
+      class="pills-variant-labels small-font"
+      title="{{ linked_product.title }}"
+    >
+      <span>{{ linked_product_option }}</span>
+    </label>
+  {%- endif -%}
+{%- endif -%}

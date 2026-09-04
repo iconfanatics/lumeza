@@ -1,0 +1,144 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "title": {
+          "type": "article-header",
+          "settings": {
+            "blog_show_tags": true,
+            "blog_show_author": true,
+            "blog_show_excerpt": true,
+            "blog_show_date": true,
+            "image_size": "16/9",
+            "show_share_facebook": true,
+            "show_share_twitter": true,
+            "show_share_pinterest": true,
+            "show_share_copy": true
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "content_layout": "alternative"
+          }
+        },
+        "article_footer": {
+          "type": "article-footer",
+          "settings": {
+            "blog_show_tags": true,
+            "blog_show_date": true,
+            "blog_show_author": true,
+            "show_share_facebook": true,
+            "show_share_twitter": true,
+            "show_share_pinterest": true,
+            "show_share_copy": true
+          }
+        }
+      },
+      "block_order": ["title", "content", "article_footer"],
+      "settings": {
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "m",
+        "padding_bottom": "no-indent"
+      }
+    },
+    "blog-post": {
+      "type": "blog-post",
+      "blocks": {
+        "article_block-1": {
+          "type": "article_block",
+          "settings": {
+            "card_type": "default",
+            "overlay_opacity": 30,
+            "show_image": true,
+            "show_tags": true,
+            "show_date": true,
+            "show_author": true,
+            "show_excerpt": false,
+            "image_ratio": "landscape",
+            "image_fit": "cover",
+            "heading_size": "h5"
+          }
+        },
+        "article_block-2": {
+          "type": "article_block",
+          "settings": {
+            "card_type": "default",
+            "overlay_opacity": 30,
+            "show_image": true,
+            "show_tags": true,
+            "show_date": true,
+            "show_author": true,
+            "show_excerpt": false,
+            "image_ratio": "landscape",
+            "image_fit": "cover",
+            "heading_size": "h5"
+          }
+        },
+        "article_block-3": {
+          "type": "article_block",
+          "settings": {
+            "card_type": "default",
+            "overlay_opacity": 30,
+            "show_image": true,
+            "show_tags": true,
+            "show_date": true,
+            "show_author": true,
+            "show_excerpt": false,
+            "image_ratio": "landscape",
+            "image_fit": "cover",
+            "heading_size": "h5"
+          }
+        },
+        "article_block-4": {
+          "type": "article_block",
+          "settings": {
+            "card_type": "default",
+            "overlay_opacity": 30,
+            "show_image": true,
+            "show_tags": true,
+            "show_date": true,
+            "show_author": true,
+            "show_excerpt": false,
+            "image_ratio": "landscape",
+            "image_fit": "cover",
+            "heading_size": "h5"
+          }
+        }
+      },
+      "block_order": [
+        "article_block-1",
+        "article_block-2",
+        "article_block-3",
+        "article_block-4"
+      ],
+      "settings": {
+        "grid_type": "standart",
+        "per_row": 4,
+        "heading": "Most Popular from the Journal",
+        "description": "",
+        "button_label": "View All",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "padding_top": "s",
+        "padding_bottom": "xs",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "enable_border_top": true,
+        "enable_border_bottom": true
+      }
+    }
+  },
+  "order": ["main", "blog-post"]
+}

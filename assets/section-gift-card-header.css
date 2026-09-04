@@ -1,0 +1,23 @@
+.gift-card-header {
+  padding: 2.4rem 0;
+  text-align: center;
+}
+.gift-card-header .header__heading-link {
+  margin: 0 auto;
+  display: inline-flex;
+  padding: 0;
+  word-break: break-word;
+  width: auto;
+}
+
+.header__heading-logo {
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 576px) {
+  .header__heading-logo {
+    max-width: 90px;
+  }
+}

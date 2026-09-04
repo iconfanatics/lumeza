@@ -1,0 +1,54 @@
+{% comment %}
+  	Renders a product card placeholder
+  	Usage:
+  {% render 'product-card-placeholder' %}
+{% endcomment %}
+
+{% if forloop != blank %}
+  {% assign placeholder_index = forloop.index | modulo: 6 | plus: 1 %}
+{% else %}
+  {% assign placeholder_index = 1 %}
+{% endif %}
+
+<div class="card-wrapper">
+  <div class="card card--product" tabindex="-1">
+    <div class="card__inner">
+      <div
+        class="media media--transparent media--hover-effect  placeholder"
+        {%- if media_size == 'landscape' -%}
+          style="padding-bottom: 70%;"
+        {%- endif -%}
+        {%- if media_size == 'portrait' -%}
+          style="padding-bottom: 130%;"
+        {%- endif -%}
+        {%- if media_size == 'square' -%}
+          style="padding-bottom: 100%;"
+        {%- endif -%}
+      >
+        {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg hover-svg' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="card-information">
+    <div class="card-information__wrapper">
+      {% if show_vendor %}
+        <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+        <div class="caption-with-letter-spacing subtitle light">
+          {{ 'products.product.vendor' | t }}
+        </div>
+      {% endif %}
+      {% if show_collection_name %}
+        <div class="caption-with-letter-spacing subtitle light">
+          {{ 'products.product.collection_name' | t }}
+        </div>
+      {% endif %}
+      <div class="card-information-block">
+        <h3 class="card__title h5 small-font">
+          {{ 'products.product.product_heading' | t }}
+        </h3>
+        {% render 'price' %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.ticker {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 0;
+}
+@media screen and (max-width: 1023px) {
+  .ticker {
+    padding: 15px 0 !important;
+  }
+}
+.ticker .container {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+.ticker .swiper-wrapper {
+  transition-timing-function: linear !important;
+  width: 100vw;
+}
+.ticker .swiper-slide {
+  width: auto !important;
+  flex-shrink: 1;
+  display: inline-flex;
+}
+.ticker .ticker__title {
+  display: inline-flex;
+  text-transform: uppercase;
+  text-align: center;
+  align-items: center;
+  white-space: nowrap;
+  margin-left: 2rem;
+}
+.ticker .ticker__title h6 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width: 1023px) {
+  .ticker .ticker__title h6 {
+    font-size: 1.4rem !important;
+  }
+}

@@ -1,0 +1,39 @@
+{% # theme-check-disable OrphanedSnippet %}
+<style>
+  .menu-drawer__utility-links .header__account {
+    display: block;
+  }
+
+  .menu-drawer__utility-links .header__account shopify-account {
+    justify-content: center;
+  }
+
+  .header__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--font-header-menu-weight);
+    text-transform: var(--font-header-menu-text-transform);
+    font-size: calc(var(--font-header-menu-scale) * 0.9rem);
+  }
+
+  .header__button .button__content {
+    display: flex;
+  }
+
+  .header__button .button__label::before,
+  .header__button .button__label::after {
+    width: 0;
+    bottom: -0.3rem;
+  }
+
+  @media screen and (min-width: 1100px) {
+    .header__button .button__content:hover .button__label::before,
+    .header__button .button__content:hover .button__label::after {
+      width: 100%;
+    }
+  }
+  .shopify-section-header.color-background-2 .account-button__avatar {
+    background-color: transparent;
+  }
+</style>

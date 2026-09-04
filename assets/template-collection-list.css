@@ -1,0 +1,124 @@
+.collection-list {
+  overflow: hidden;
+}
+.collection-list .container {
+  padding: 0;
+}
+.collection-list .collection-list-heading {
+  text-align: center;
+  padding: 3.2rem;
+  border-bottom: 1px solid rgb(var(--color-border));
+  margin: 0;
+}
+.collection-list .collections-grid {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 0;
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width: 576px) {
+  .collection-list .collections-grid {
+    grid-template-columns: repeat(clamp(1, var(--per-row), 2), 1fr);
+  }
+}
+@media screen and (min-width: 990px) {
+  .collection-list .collections-grid {
+    grid-template-columns: repeat(clamp(1, var(--per-row), 3), 1fr);
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-list .collections-grid {
+    grid-template-columns: repeat(var(--per-row), 1fr);
+  }
+}
+.collection-list .collections-grid__card {
+  padding: 2.4rem;
+}
+.collection-list .border-item {
+  position: relative;
+}
+@media screen and (min-width: 576px) {
+  .collection-list .border-item::before {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: rgb(var(--color-border));
+    right: 0;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-list .border-item:not(.hide_border)::before {
+    content: "";
+  }
+}
+.collection-list .border-item:after {
+  position: absolute;
+  background: rgb(var(--color-border));
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  height: 0.1rem;
+}
+.collection-list .collection-product-list.wrapper-per-row__1 .border-item:nth-child(n+1):not(:first-child):after {
+  content: "";
+}
+@media screen and (max-width: 575px) {
+  .collection-list .collection-product-list.wrapper-per-row__2 .border-item:nth-child(n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 576px) and (max-width: 1099px) {
+  .collection-list .collection-product-list.wrapper-per-row__2 .border-item:not(:nth-child(2n))::before, .collection-list .collection-product-list.wrapper-per-row__2 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-list .collection-product-list.wrapper-per-row__2 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (max-width: 575px) {
+  .collection-list .collection-product-list.wrapper-per-row__3 .border-item:nth-child(n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 576px) and (max-width: 989px) {
+  .collection-list .collection-product-list.wrapper-per-row__3 .border-item:not(:nth-child(2n))::before, .collection-list .collection-product-list.wrapper-per-row__3 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 990px) and (max-width: 1099px) {
+  .collection-list .collection-product-list.wrapper-per-row__3 .border-item:not(:nth-child(3n))::before, .collection-list .collection-product-list.wrapper-per-row__3 .border-item:nth-child(3n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-list .collection-product-list.wrapper-per-row__3 .border-item:nth-child(3n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (max-width: 575px) {
+  .collection-list .collection-product-list.wrapper-per-row__4 .border-item:nth-child(n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 576px) and (max-width: 989px) {
+  .collection-list .collection-product-list.wrapper-per-row__4 .border-item:not(:nth-child(2n))::before, .collection-list .collection-product-list.wrapper-per-row__4 .border-item:nth-child(2n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media (min-width: 990px) and (max-width: 1099px) {
+  .collection-list .collection-product-list.wrapper-per-row__4 .border-item:not(:nth-child(3n))::before, .collection-list .collection-product-list.wrapper-per-row__4 .border-item:nth-child(3n+1):not(:first-child):after {
+    content: "";
+  }
+}
+@media screen and (min-width: 1100px) {
+  .collection-list .collection-product-list.wrapper-per-row__4 .border-item:nth-child(4n+1):not(:first-child):after {
+    content: "";
+  }
+}

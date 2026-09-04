@@ -1,0 +1,88 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-cart": {
+      "type": "main-cart",
+      "blocks": {
+        "main-cart-items": {
+          "type": "main-cart-items",
+          "settings": {
+            "show_vendor": false,
+            "show_collection_name": true,
+            "image_fit": "cover"
+          }
+        },
+        "main-cart-footer": {
+          "type": "main-cart-footer",
+          "settings": {
+            "show_cart_note": false,
+            "min_spend": "100",
+            "show_shipping": true
+          }
+        }
+      },
+      "block_order": ["main-cart-items", "main-cart-footer"],
+      "settings": {
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
+    "collection-grid": {
+      "type": "collection-grid",
+      "blocks": {
+        "categories-1": {
+          "type": "categories",
+          "settings": {}
+        },
+        "categories-2": {
+          "type": "categories",
+          "settings": {}
+        },
+        "categories-3": {
+          "type": "categories",
+          "settings": {}
+        },
+        "categories-4": {
+          "type": "categories",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "categories-1",
+        "categories-2",
+        "categories-3",
+        "categories-4"
+      ],
+      "settings": {
+        "columns": 4,
+        "heading": "",
+        "description": "<p>Explore our Categories</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "tertiary",
+        "button_arrow": true,
+        "image_ratio": "portrait",
+        "card_type": "overlay",
+        "text_center": "left",
+        "card_type_text": "overlay",
+        "overlay_opacity": 20,
+        "show_collection_desc": true,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "enable_border_top": false,
+        "enable_border_bottom": true
+      }
+    }
+  },
+  "order": ["main-cart", "collection-grid"]
+}

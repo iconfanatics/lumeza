@@ -1,0 +1,161 @@
+.countdown {
+  overflow: hidden;
+  display: block;
+}
+.countdown .container {
+  padding: 0;
+}
+.countdown .countdown_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 1100px) {
+  .countdown .countdown_wrapper {
+    flex-direction: unset;
+  }
+}
+.countdown .countdown_heading-wrapper {
+  padding: 2.4rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+@media screen and (min-width: 1100px) {
+  .countdown .countdown_heading-wrapper {
+    border-right: 0.1rem solid rgb(var(--color-border));
+    justify-content: unset;
+    padding: 2.4rem 4.3rem;
+  }
+}
+.countdown .countdown_heading-wrapper::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: -50%;
+  width: 200vw;
+  height: 1px;
+  background-color: rgb(var(--color-border));
+}
+@media screen and (min-width: 1100px) {
+  .countdown .countdown_heading-wrapper::before {
+    height: 0;
+  }
+}
+.countdown .countdown_heading {
+  margin: 0;
+}
+@media screen and (min-width: 1100px) {
+  .countdown .countdown_heading {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+}
+.countdown .countdown__item-info-block {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 10px 0 48px;
+}
+.countdown .countdown__item-info-desc {
+  max-width: 440px;
+  margin: 0 auto;
+}
+.countdown .countdown_left-wrapper {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex: auto;
+}
+@media screen and (min-width: 1100px) {
+  .countdown .countdown_left-wrapper {
+    padding: 24px;
+    border-right: 1px solid rgb(var(--color-border));
+  }
+}
+.countdown .countdown_left-wrapper .button {
+  margin-top: 20px;
+}
+.countdown .countdown_right-wrapper {
+  padding: 24px;
+  position: relative;
+  flex: 0 0 100%;
+}
+@media screen and (min-width: 1100px) {
+  .countdown .countdown_right-wrapper {
+    flex: 0 0 50%;
+  }
+}
+.countdown .countdown_right-wrapper::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200vw;
+  height: 1px;
+  background-color: rgb(var(--color-border));
+}
+@media screen and (min-width: 1100px) {
+  .countdown .countdown_right-wrapper::before {
+    height: 0;
+  }
+}
+.countdown .countdown_image-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+.countdown .countdown_image-wrapper img,
+.countdown .countdown_image-wrapper svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.countdown .countdown__main {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.countdown .countdown__main .countdown__block_num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+.countdown .countdown__main .countdown__block_num span:first-child {
+  margin: 0;
+  padding: 20px 17.5px;
+  background-color: rgb(var(--color-background-secondary));
+}
+.countdown__end-info {
+  position: relative;
+  display: none;
+  flex-grow: 1;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 3;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.countdown__end-info h3,
+.countdown__end-info p {
+  margin: 0;
+  color: rgb(var(--color-foreground-title));
+}
+.countdown__end-info h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 100%;
+}

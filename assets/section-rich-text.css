@@ -1,0 +1,55 @@
+.rich-text__blocks * {
+  overflow-wrap: break-word;
+}
+
+.rich-text__blocks-small .rich-text__wrapper {
+  max-width: 80rem;
+}
+@media screen and (max-width: 1200px) {
+  .rich-text__blocks-small .rich-text__wrapper {
+    max-width: 72rem;
+  }
+}
+.rich-text__blocks-small .rich-text__text {
+  max-width: 58rem;
+}
+
+.rich-text__blocks-large .rich-text__wrapper {
+  max-width: 110rem;
+}
+.rich-text__blocks-large .rich-text__text {
+  max-width: 64rem;
+}
+
+.rich-text__wrapper {
+  margin: 0 auto;
+}
+.rich-text__wrapper .rich-text__heading {
+  margin-bottom: 1.4rem;
+}
+.rich-text__wrapper .rich-text__heading:only-child {
+  margin-bottom: 0;
+}
+.rich-text__wrapper .rich-text__text {
+  margin: 0 auto 2rem;
+}
+.rich-text__wrapper .rich-text__text p {
+  margin: 1.4rem 0;
+}
+.rich-text__wrapper .rich-text__subheading {
+  margin-bottom: 3rem;
+}
+@media screen and (min-width: 750px) {
+  .rich-text__wrapper .rich-text__subheading {
+    margin-bottom: 6rem;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .rich-text__wrapper .rich-text__subheading {
+    margin-bottom: 10.3rem;
+  }
+}
+
+.rich-text--full-width .rich-text__wrapper {
+  padding: 0 2rem;
+}

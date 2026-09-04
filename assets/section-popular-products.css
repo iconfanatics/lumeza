@@ -1,0 +1,83 @@
+.popular-products .popular-products__wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  --col-gap: 4.8rem;
+  --row-gap: 4rem;
+  column-gap: var(--col-gap);
+}
+@media screen and (min-width: 576px) {
+  .popular-products .popular-products__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 990px) {
+  .popular-products .popular-products__wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (min-width: 1100px) {
+  .popular-products .popular-products__wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (max-width: 575px) {
+  .popular-products .popular-products__wrapper-two__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .popular-products .popular-products__wrapper-two__cards .border-item:not(:nth-child(2n)):after {
+    content: "";
+  }
+  .popular-products .popular-products__wrapper-two__cards .border-item:nth-child(2n+1):not(:first-child):before {
+    content: "";
+  }
+}
+.popular-products .border-item {
+  position: relative;
+  padding: calc(var(--row-gap) / 2) 0;
+  min-width: 0.0001px;
+}
+.popular-products .border-item:before, .popular-products .border-item:after {
+  position: absolute;
+  background: rgb(var(--color-border));
+  top: 0;
+}
+.popular-products .border-item:before {
+  left: -100vw;
+  width: 300vw;
+  height: 0.1rem;
+}
+.popular-products .border-item:after {
+  right: 0;
+  transform: translateX(calc(var(--col-gap) / 2));
+  width: 0.1rem;
+  height: 100%;
+}
+@media (min-width: 576px) and (max-width: 989px) {
+  .popular-products .border-item:not(:nth-child(2n)):after {
+    content: "";
+  }
+  .popular-products .border-item:nth-child(2n+1):not(:first-child):before {
+    content: "";
+  }
+}
+@media (min-width: 990px) and (max-width: 1099px) {
+  .popular-products .border-item:not(:nth-child(3n)):after {
+    content: "";
+  }
+  .popular-products .border-item:nth-child(3n+1):not(:first-child):before {
+    content: "";
+  }
+}
+@media screen and (min-width: 1100px) {
+  .popular-products .border-item:not(:nth-child(4n)):after {
+    content: "";
+  }
+  .popular-products .border-item:nth-child(4n+1):not(:first-child):before {
+    content: "";
+  }
+}
+@media screen and (max-width: 575px) {
+  .popular-products .popular-products__wrapper:not(.popular-products__wrapper-two__cards) .border-item:nth-child(n+1):not(:first-child):before {
+    content: "";
+  }
+}

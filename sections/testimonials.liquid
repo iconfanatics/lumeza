@@ -1,0 +1,369 @@
+{{ 'section-testimonials.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ "testimonials.js" | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  {% render 'section-padding' %}
+  {% render 'section-margin' %}
+{%- endstyle -%}
+<div
+  class="testimonials color-{{ section.settings.color_scheme }} background section-{{ section.id }}-padding"
+  data-id="shopify-section-{{ section.id }}"
+>
+  <div class="container">
+    {% if section.settings.subheading != blank %}
+      <div class="testimonials__subheading subtitle">
+        {{ section.settings.subheading | escape }}
+      </div>
+    {% endif %}
+
+    <div class="testimonials__wrapper">
+      <div class="testimonials__block">
+        {%- for block in section.blocks -%}
+          <div
+            class="testimonials__item-wrapper{% if forloop.index == 1 %} active{% endif %}"
+            data-tab-content="{{ section.id }}-testimonials-tab-{{ forloop.index }}"
+          >
+            <div class="testimonials__item-block">
+              {% if block.settings.enable_stars %}
+                <div class="testimonials-stars">
+                  {% for i in (1..5) %}
+                    {% liquid
+                      if i <= block.settings.rating
+                        assign active = true
+                      else
+                        assign active = false
+                      endif
+                    %}
+                    {% render 'icon-star', star_active: active %}
+                  {% endfor %}
+                  {% comment %}
+                    <span class="icon-star__count ">
+                    	{{ block.settings.rating | append : '.00' }}
+                    </span>
+                  {% endcomment %}
+                </div>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <h2 class="testimonials__desc">
+                  {{ block.settings.text }}
+                </h2>
+              {% endif %}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="testimonials-tabs-list__wrapper">
+        <ul class="testimonials-tabs-list">
+          {%- for block in section.blocks -%}
+            <li
+              data-tab-target="{{ section.id }}-testimonials-tab-{{ forloop.index }}"
+              class="testimonials-tabs__item{% if forloop.index == 1 %} active{% endif %}"
+            >
+              {% if block.settings.logo_img != blank %}
+                {%- style -%}
+                  	.logo__image-{{ forloop.index }} {
+                  		width: {{ block.settings.logo_width | times: 1 | round: 0 }}px;
+                  	}
+                  @media screen and (max-width: 1200px) {
+                  	.logo__image-{{ forloop.index }} {
+                  		width: {{ block.settings.logo_width | times: 0.9 | round: 0 }}px;
+                  	}
+                  }
+                  @media screen and (max-width: 750px) {
+                  	.logo__image-{{ forloop.index }} {
+                  		width: {{ block.settings.logo_width | times: 0.7 | round: 0 }}px;
+                  	}
+                  }
+                {%- endstyle -%}
+                {% liquid
+                  assign image_height = block.settings.logo_img.width | divided_by: block.settings.logo_img.aspect_ratio
+                %}
+                {% capture class %}logo__image logo__image-{{ forloop.index }}{% endcapture %}
+                {{
+                  block.settings.logo_img
+                  | image_url: width: 3840
+                  | image_tag:
+                    loading: 'lazy',
+                    width: block.settings.logo_img.width,
+                    height: image_height,
+                    sizes: '100vw',
+                    widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                    class: class
+                }}
+              {% else %}
+                <div class="testimonials__author-block">
+                  {% if block.settings.author_image != blank %}
+                    <div class="testimonials__author-img">
+                      {% assign image_height = block.settings.author_image.width
+                        | divided_by: block.settings.author_image.aspect_ratio
+                      %}
+                      {{
+                        block.settings.author_image
+                        | image_url: width: 3840
+                        | image_tag:
+                          loading: 'lazy',
+                          sizes: '30px, 60px, 90px, 120px',
+                          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                          height: image_height
+                      }}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.author_position != blank or block.settings.author_name != blank %}
+                    <div class="testimonials__author-info">
+                      {% if block.settings.author_name != blank %}
+                        <div class="testimonials__author-name">
+                          {{ block.settings.author_name }}
+                        </div>
+                      {% endif %}
+                      {% if block.settings.author_position != blank %}
+                        <div class="testimonials__author-position subtitle">
+                          {{ block.settings.author_position }}
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.testimonials.name",
+  "tag": "section",
+  "class": "testimonials-section spaced-section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "t:sections.all.subheading.label",
+      "default": "t:sections.testimonials.settings.subheading.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-padding.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_top.label"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_bottom.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonials_tab",
+      "name": "t:sections.testimonials.blocks.testimonials_tab.name",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:sections.testimonials.blocks.testimonials_tab.settings.rating_options.header.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_stars",
+          "default": true,
+          "label": "t:sections.testimonials.blocks.testimonials_tab.settings.rating_options.enable_stars.label"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "t:sections.testimonials.blocks.testimonials_tab.settings.rating_options.review_score.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "t:sections.testimonials.blocks.testimonials_tab.settings.text.default",
+          "label": "t:sections.all.text.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_img",
+          "label": "t:sections.testimonials.blocks.testimonials_tab.settings.logo_img.label",
+          "info": "t:sections.testimonials.blocks.testimonials_tab.settings.logo_img.info"
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "min": 100,
+          "max": 300,
+          "step": 10,
+          "default": 140,
+          "unit": "px",
+          "label": "t:sections.testimonials.blocks.testimonials_tab.settings.logo_img.logo_width"
+        },
+
+        {
+          "type": "header",
+          "content": "t:sections.all.author.header.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "t:sections.all.author.author_image.label"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "default": "t:sections.testimonials.blocks.testimonials_tab.settings.author_name.default",
+          "label": "t:sections.all.author.author_name.label"
+        },
+        {
+          "type": "text",
+          "id": "author_position",
+          "label": "t:sections.all.author.author_position.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.testimonials.presets.name",
+      "blocks": [
+        {
+          "type": "testimonials_tab"
+        },
+        {
+          "type": "testimonials_tab"
+        },
+        {
+          "type": "testimonials_tab"
+        },
+        {
+          "type": "testimonials_tab"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
