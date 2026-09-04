@@ -1,0 +1,303 @@
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .coming-soon-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1e1e2f 0%, #11111a 100%);
+    color: #ffffff;
+    padding: 4rem 2rem;
+  }
+
+  .coming-soon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(123, 44, 191, 0.15) 0%, transparent 60%);
+    animation: rotateGradient 20s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes rotateGradient {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .coming-soon-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 4rem;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes slideUpFade {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .coming-soon__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #ffffff, #a8b0d3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+  }
+
+  .coming-soon__subtitle {
+    font-size: 1.125rem;
+    color: #a8b0d3;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .countdown-number {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.05);
+    min-width: 100px;
+  }
+
+  .countdown-label {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8c94af;
+  }
+
+  .coming-soon-form .newsletter-form__field-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .coming-soon-form .field__input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 8px;
+  }
+  
+  .coming-soon-form .field__input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .coming-soon-form .newsletter__button {
+    background: #ffffff;
+    color: #11111a;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .coming-soon-form .newsletter__button:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 768px) {
+    .coming-soon-card {
+      padding: 2rem 1.5rem;
+    }
+    .countdown-container {
+      gap: 0.5rem;
+    }
+    .countdown-number {
+      font-size: 2rem;
+      min-width: 70px;
+      padding: 0.75rem 1rem;
+    }
+  }
+</style>
+
+<div class="coming-soon-wrapper">
+  <div class="coming-soon-card">
+    <h1 class="coming-soon__title">{{ section.settings.heading }}</h1>
+    <div class="coming-soon__subtitle">{{ section.settings.text }}</div>
+    
+    {% if section.settings.show_countdown %}
+      <div class="countdown-container" id="countdown-{{ section.id }}">
+        <div class="countdown-item">
+          <div class="countdown-number" id="days">00</div>
+          <div class="countdown-label">{{ 'general.date.days' | t | default: 'Days' }}</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="hours">00</div>
+          <div class="countdown-label">{{ 'general.date.hours' | t | default: 'Hours' }}</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="minutes">00</div>
+          <div class="countdown-label">{{ 'general.date.minutes' | t | default: 'Minutes' }}</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="seconds">00</div>
+          <div class="countdown-label">{{ 'general.date.seconds' | t | default: 'Seconds' }}</div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="coming-soon-form">
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form__field-wrapper">
+          <div class="field">
+            <input
+              id="NewsletterForm--{{ section.id }}"
+              type="email"
+              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+              name="contact[email]"
+              class="field__input field newsletter-form__field"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="{{ 'newsletter.label' | t | default: 'Email address' }}"
+              required
+            >
+            <label class="field__label visually-hidden" for="NewsletterForm--{{ section.id }}">
+              {{ 'newsletter.label' | t | default: 'Email address' }}
+            </label>
+          </div>
+          {%- if form.errors -%}
+            <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
+              {%- render 'icon-error' -%}
+              {{- form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email -}}
+            </small>
+          {%- endif -%}
+          <button type="submit" class="newsletter__button button button--tertiary" name="commit">
+            <span class="button-label">{{ 'newsletter.button_label' | t | default: 'Notify me' }}</span>
+          </button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <h3 class="newsletter-form__message newsletter-form__message--success form__message" tabindex="-1" autofocus>
+            {% render 'icon-success' -%}
+            {{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}
+          </h3>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+{% if section.settings.show_countdown and section.settings.launch_date != blank %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const launchDateString = "{{ section.settings.launch_date }}";
+    // Try to parse the date. Format expected: YYYY-MM-DD
+    const countDownDate = new Date(launchDateString).getTime();
+
+    if (isNaN(countDownDate)) {
+        console.error("Invalid launch date format. Please use YYYY-MM-DD.");
+        return;
+    }
+
+    const timer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("days").innerHTML = "00";
+        document.getElementById("hours").innerHTML = "00";
+        document.getElementById("minutes").innerHTML = "00";
+        document.getElementById("seconds").innerHTML = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
+      document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
+      document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
+    }, 1000);
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Coming Soon",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Something Amazing Is Coming",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>We are working hard to bring you a new experience. Subscribe to be the first to know when we launch.</p>",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "default": true,
+      "label": "Show countdown timer"
+    },
+    {
+      "type": "text",
+      "id": "launch_date",
+      "label": "Launch Date (YYYY-MM-DD)",
+      "default": "2026-12-31",
+      "info": "Used for the countdown timer. Format must be YYYY-MM-DD"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Coming Soon"
+    }
+  ]
+}
+{% endschema %}
