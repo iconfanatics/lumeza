@@ -1,20 +1,43 @@
 # Work Log — Lumeza Shopify Theme
 
-This file tracks all git commits, their types, and a short description of what was done.
+This file tracks all git commits with their ID, type, files changed, and a short description.
+This file is committed alongside every change so the log is always up to date.
 
 ---
 
 ## Commit History
 
-| # | Commit ID | Short ID | Date | Type | Description |
-|---|-----------|----------|------|------|-------------|
-| 1 | `68aa63851ec8c06ad92ef65cc8297035d944e0f4` | `68aa638` | 2026-09-04 | `init` | Initial project commit — Luna Shopify theme base files |
-| 2 | `e02f917c075c67b70da1c40cbb738d16c4b570dd` | `e02f917` | 2026-09-04 | `feat` | Added Coming Soon page — created `sections/coming-soon.liquid` and updated `templates/password.json` to use the new section |
-| 3 | *(pending)* | — | 2026-09-04 | `design` | Completely redesigned Coming Soon page — premium dark glassmorphism aesthetic, animated orbs, live countdown timer, social link support, and Inter + Space Grotesk typography |
+---
+
+### `68aa638` — Initial Commit
+- **Date:** 2026-09-04
+- **Type:** `init`
+- **Files Changed:** All base theme files (assets, blocks, config, layout, locales, sections, snippets, templates)
+- **Details:** Initial upload of the Luna Shopify theme. Project setup, all default theme files included.
 
 ---
 
-## Commit Types Reference
+### `e02f917` — Add Coming Soon Page
+- **Date:** 2026-09-04
+- **Type:** `feat`
+- **Files Changed:**
+  - `sections/coming-soon.liquid` *(new)*
+  - `templates/password.json` *(modified)*
+- **Details:** Created a new Coming Soon section and wired it to the password page template. Included a newsletter signup form and basic countdown timer.
+
+---
+
+### `d5b27f3` — Redesign Coming Soon Page + Add work.md
+- **Date:** 2026-09-04
+- **Type:** `design`
+- **Files Changed:**
+  - `sections/coming-soon.liquid` *(redesigned)*
+  - `work.md` *(new)*
+- **Details:** Completely redesigned the Coming Soon page with a premium dark glassmorphism UI. Added animated gradient orbs, grid overlay, shimmer headline, live countdown timer, inline newsletter form with gradient button, and optional social links (Instagram, X, Facebook). Added `work.md` to track commit history.
+
+---
+
+## Commit Type Reference
 
 | Type | Meaning |
 |------|---------|
@@ -24,10 +47,10 @@ This file tracks all git commits, their types, and a short description of what w
 | `fix` | Bug fix |
 | `refactor` | Code restructure without feature change |
 | `style` | CSS/style-only changes |
-| `config` | Configuration file changes |
+| `config` | Configuration changes |
 | `docs` | Documentation updates |
 | `chore` | Maintenance tasks |
 
 ---
 
-> Update this file after every commit with the commit ID and a short description.
+> **Rule:** Always update this file and include it in every commit so the log stays in sync.
