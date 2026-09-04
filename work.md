@@ -37,7 +37,17 @@ This file is committed alongside every change so the log is always up to date.
 
 ---
 
+### `1e3f55f` — Update work.md with Detailed Commit History
+- **Date:** 2026-09-04
+- **Type:** `docs`
+- **Files Changed:**
+  - `work.md` *(modified)*
+- **Details:** Reformatted work.md so each commit has its own section with commit ID, date, type, files changed, and full details. Established the rule that work.md must be updated and committed with every change.
+
+---
+
 ## Commit Type Reference
+
 
 | Type | Meaning |
 |------|---------|
